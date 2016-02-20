@@ -21,12 +21,12 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							player_lib.php
  * version:						1.1
  *
  */
- 
+
 // Predefined daemon Response messages
 define("MPD_RESPONSE_ERR", "ACK");
 define("MPD_RESPONSE_OK",  "OK");
@@ -97,7 +97,7 @@ function sendMpdCommand($sock,$cmd) {
 		fputs($sock, $cmd);
 	} else {
 		$cmd = $cmd."\n";
-		fputs($sock, $cmd);	
+		fputs($sock, $cmd);
 	}
 }
 
@@ -155,7 +155,7 @@ function _loadDirForLib($sock, $flat, $dir) {
 			if (!$skip) {
 				$flat[$iItem][$element] = $value;
 			}
-		} 
+		}
 	}
 	return $flat;
 }
@@ -386,9 +386,9 @@ function searchDB($sock,$querytype,$query) {
 		sendMpdCommand($sock,"search ".$querytype." \"".html_entity_decode($query)."\"");
 		//sendMpdCommand($sock,"search any \"".html_entity_decode($query)."\"");
 	break;
-	
+
 	}
-	
+
 	//$response =  htmlentities(readMpdResponse($sock),ENT_XML1,'UTF-8');
 	//$response = htmlspecialchars(readMpdResponse($sock));
 	$response = readMpdResponse($sock);
@@ -437,7 +437,7 @@ function songTime($sec) {
 
 function phpVer() {
 	$version = phpversion();
-	return substr($version, 0, 3); 
+	return substr($version, 0, 3);
 }
 
 // Fix session environments in PHP 5.3 (the usual WAMP of ACX...)
@@ -515,7 +515,7 @@ function _getSpopListing($sock, $queryString) {
 
 			}
 
-			if (strcmp($arrayResponse["playlists"][$arrayQueryStringParts[$i]]["type"], "playlist") == 0) { 
+			if (strcmp($arrayResponse["playlists"][$arrayQueryStringParts[$i]]["type"], "playlist") == 0) {
 			// This is a playlist, navigate into it and stop
 				$arrayResponse = sendSpopCommand($sock,"ls " . $arrayResponse["playlists"][$arrayQueryStringParts[$i]]["index"]);
 				break;
@@ -534,7 +534,7 @@ function _getSpopListing($sock, $queryString) {
 		array_push($arrayReturn, $arrayCurrentEntry);
 
 		$i = 0;
-		if (isset($arrayResponse["tracks"])) { 
+		if (isset($arrayResponse["tracks"])) {
 		// This is a tracklist within a playlist
 			$nItems = sizeof($arrayResponse["tracks"]);
 			while ($i < $nItems) {
@@ -544,7 +544,7 @@ function _getSpopListing($sock, $queryString) {
 				$arrayCurrentEntry["Title"] = $arrayResponse["tracks"][$i]["title"];
 				$arrayCurrentEntry["Artist"] = $arrayResponse["tracks"][$i]["artist"];
 				$arrayCurrentEntry["Album"] = $arrayResponse["tracks"][$i]["album"];
-				
+
 				array_push($arrayReturn, $arrayCurrentEntry);
 
 				$i++;
@@ -743,7 +743,7 @@ function playerSession($action,$db,$var,$value) {
 			// return true;
 		// }
 	}
-	
+
 	// unset and destroy current PHP SESSION
 	if ($action == 'destroy') {
 	session_unset();
@@ -758,7 +758,7 @@ function playerSession($action,$db,$var,$value) {
 			}
 		}
 	}
-	
+
 	// store a value in the cfgdb and in current PHP SESSION
 	if ($action == 'write') {
 	$_SESSION[$var] = $value;
@@ -766,13 +766,13 @@ function playerSession($action,$db,$var,$value) {
 	cfgdb_update('cfg_engine',$dbh,$var,$value);
 	$dbh = null;
 	}
-	
+
 	// record actual PHP Session ID in SQLite datastore
 	if ($action == 'storesessionid') {
 	$sessionid = session_id();
 	playerSession('write',$db,'sessionid',$sessionid);
 	}
-	
+
 	// read PHP SESSION ID stored in SQLite datastore and use it to "attatch" the same SESSION (used in worker)
 	if ($action == 'getsessionid') {
 	$dbh  = cfgdb_connect($db);
@@ -780,7 +780,7 @@ function playerSession($action,$db,$var,$value) {
 	$dbh = null;
 	return $result['0']['value'];
 	}
-	
+
 }
 
 function cfgdb_connect($dbpath) {
@@ -999,12 +999,12 @@ function pushFile($filepath) {
 function hashCFG($action,$db) {
 playerSession('open',$db);
 	switch ($action) {
-		
+
 //		case 'check_net':
 //		$hash = md5_file('/etc/network/interfaces');
 //		if ($hash != $_SESSION['netconfhash']) {
 //			if ($_SESSION['netconf_advanced'] != 1) {
-//			playerSession('write',$db,'netconf_advanced',1); 
+//			playerSession('write',$db,'netconf_advanced',1);
 //			}
 //		return false;
 //		} else {
@@ -1013,50 +1013,50 @@ playerSession('open',$db);
 //			}
 //		}
 //		break;
-		
+
 //		case 'check_mpd':
 //		$hash = md5_file('/etc/mpd.conf');
 //		if ($hash != $_SESSION['mpdconfhash']) {
 //			if ($_SESSION['mpdconf_advanced'] != 1) {
-//			playerSession('write',$db,'mpdconf_advanced',1); 
+//			playerSession('write',$db,'mpdconf_advanced',1);
 //			}
 //		return false;
 //		} else {
 //			if ($_SESSION['mpdconf_advanced'] != 0) {
-//			playerSession('write',$db,'mpdconf_advanced',0); 
+//			playerSession('write',$db,'mpdconf_advanced',0);
 //			}
 //		}
 //		break;
-		
+
 //		case 'check_source':
 //		$hash = md5_file('/etc/auto.nas');
 //		if ($hash != $_SESSION['sourceconfhash']) {
 //			if ($_SESSION['sourceconf_advanced'] != 1) {
-//			playerSession('write',$db,'sourceconf_advanced',1); 
+//			playerSession('write',$db,'sourceconf_advanced',1);
 //			}
 //		return false;
 //		} else {
 //			if ($_SESSION['sourceconf_advanced'] != 0) {
-//			playerSession('write',$db,'sourceconf_advanced',0); 
+//			playerSession('write',$db,'sourceconf_advanced',0);
 //			}
 //		}
 //		break;
-		
+
 //		case 'hash_net':
 //		$hash = md5_file('/etc/network/interfaces');
-//		playerSession('write',$db,'netconfhash',$hash); 
+//		playerSession('write',$db,'netconfhash',$hash);
 //		break;
-		
+
 //		case 'hash_mpd':
 //		$hash = md5_file('/etc/mpd.conf');
-//		playerSession('write',$db,'mpdconfhash',$hash); 
+//		playerSession('write',$db,'mpdconfhash',$hash);
 //		break;
-		
+
 //		case 'hash_source':
 //		$hash = md5_file('/etc/auto.nas');
-//		playerSession('write',$db,'sourceconfhash',$hash); 
+//		playerSession('write',$db,'sourceconfhash',$hash);
 //		break;
-	} 
+	}
 playerSession('unlock');
 return true;
 }
@@ -1157,7 +1157,7 @@ function debug_footer($db) {
 		echo "###### SESSION ######\n";
 		echo "\n";
 		echo "STATUS:\t\t".session_status()."\n";
-		echo "ID:\t\t".session_id()."\n"; 
+		echo "ID:\t\t".session_id()."\n";
 		echo "SAVE PATH:\t".session_save_path()."\n";
 		echo "\n";
 		echo "\n";
@@ -1234,7 +1234,7 @@ function waitWorker($sleeptime,$section) {
 			break;
 		}
 	}
-} 
+}
 
 // search a string in a file and replace with another string the whole line.
 function wrk_replaceTextLine($file,$pos_start,$pos_stop,$strfind,$strrepl) {
@@ -1260,7 +1260,7 @@ function wrk_backup($bktype) {
 	$filepath = "/run/backup_".date('Y-m-d').".tar.gz";
 	$cmdstring = "tar -czf ".$filepath." /var/lib/mpd /etc/auto.nas /etc/mpd.conf /var/www/db/player.db";
 	}
-	
+
 sysCmd($cmdstring);
 return $filepath;
 }
@@ -1296,8 +1296,8 @@ function wrk_mpdconf($outpath,$db) {
 	$mpdcfg = sdbquery($query_cfg,$dbh);
 	$dbh = null;
 
-	
-	
+
+
 // set mpd.conf file header
 	$output = "###################################\n";
 	$output .= "# Auto generated mpd.conf file\n";
@@ -1305,7 +1305,7 @@ function wrk_mpdconf($outpath,$db) {
 	$output .= "# Use player-UI MPD config section\n";
 	$output .= "###################################\n";
 	$output .= "\n";
- 
+
 // parse DB output
 	foreach ($mpdcfg as $cfg) {
 		if ($cfg['param'] == 'audio_output_format' && $cfg['value_player'] == 'disabled'){
@@ -1316,7 +1316,7 @@ function wrk_mpdconf($outpath,$db) {
 		$device = $cfg['value_player'];
 		var_export($device);
 		// $output .= '';
-		} else if ($cfg['param'] == 'mixer_type' && $cfg['value_player'] == 'hardware' ) { 
+		} else if ($cfg['param'] == 'mixer_type' && $cfg['value_player'] == 'hardware' ) {
 		// $hwmixer['device'] = 'hw:0';
 		$hwmixer['control'] = alsa_findHwMixerControl($device);
 		// $hwmixer['index'] = '1';
@@ -1359,7 +1359,7 @@ function wrk_mpdconf($outpath,$db) {
 
 function wrk_sourcemount($db,$action,$id) {
 	switch ($action) {
-		
+
 		case 'mount':
 			$dbh = cfgdb_connect($db);
 			$mp = cfgdb_read('cfg_source',$dbh,'',$id);
@@ -1389,9 +1389,9 @@ function wrk_sourcemount($db,$action,$id) {
 			$mp[0]['error'] = implode("\n",$sysoutput);
 			cfgdb_update('cfg_source',$dbh,'',$mp[0]);
 			$return = 0;
-			}	
+			}
 		break;
-		
+
 		case 'mountall':
 		$dbh = cfgdb_connect($db);
 		$mounts = cfgdb_read('cfg_source',$dbh);
@@ -1402,7 +1402,7 @@ function wrk_sourcemount($db,$action,$id) {
 		}
 		$dbh = null;
 		break;
-		
+
 	}
 return $return;
 }
@@ -1412,7 +1412,7 @@ $action = $queueargs['mount']['action'];
 unset($queueargs['mount']['action']);
 	switch ($action) {
 
-		case 'reset': 
+		case 'reset':
 		$dbh = cfgdb_connect($db);
 		$source = cfgdb_read('cfg_source',$dbh);
 			foreach ($source as $mp) {
@@ -1452,11 +1452,11 @@ unset($queueargs['mount']['action']);
 		$return = 0;
 		}
 		break;
-		
+
 		case 'edit':
 		$dbh = cfgdb_connect($db);
 		$mp = cfgdb_read('cfg_source',$dbh,'',$queueargs['mount']['id']);
-		cfgdb_update('cfg_source',$dbh,'',$queueargs['mount']);	
+		cfgdb_update('cfg_source',$dbh,'',$queueargs['mount']);
 		sysCmd("umount -f \"/mnt/NAS/".$mp[0]['name']."\"");
 			if ($mp[0]['name'] != $queueargs['mount']['name']) {
 			sysCmd("rmdir \"/mnt/NAS/".$mp[0]['name']."\"");
@@ -1470,7 +1470,7 @@ unset($queueargs['mount']['action']);
 		error_log(">>>>> wrk_sourcecfg(edit) exit status = >>>>> ".$return, 0);
 		$dbh = null;
 		break;
-		
+
 		case 'delete':
 		$dbh = cfgdb_connect($db);
 		$mp = cfgdb_read('cfg_source',$dbh,'',$queueargs['mount']['id']);
@@ -1493,54 +1493,54 @@ $file = '/proc/cpuinfo';
 	$fileData = file($file);
 	foreach($fileData as $line) {
 		if (substr($line, 0, 8) == 'Hardware') {
-			$arch = trim(substr($line, 11, 50)); 
+			$arch = trim(substr($line, 11, 50));
 				switch($arch) {
-					
+
 					// RaspberryPi
 					case 'BCM2708':
 					$arch = '01';
 					break;
-					
+
 					// UDOO
 					case 'SECO i.Mx6 UDOO Board':
 					$arch = '02';
 					break;
-					
+
 					// CuBox
 					case 'Marvell Dove (Flattened Device Tree)':
 					$arch = '03';
 					break;
-					
+
 					// BeagleBone Black
 					case 'Generic AM33XX (Flattened Device Tree)':
 					$arch = '04';
 					break;
-					
+
 					// Compulab Utilite
 					case 'Compulab CM-FX6':
 					$arch = '05';
 					break;
-					
+
 					// Wandboard
 					case 'Freescale i.MX6 Quad/DualLite (Device Tree)':
 					$arch = '06';
 					break;
-					
-					// Cubieboard 
+
+					// Cubieboard
 					case 'sun7i':
 					$arch = '07';
 					break;
-					
+
 					// RaspberryPi 2
 					case 'BCM2709':
 					$arch = '08';
 					break;
-					
+
 					// Odroid C1
 					case 'ODROIDC':
 					$arch = '09';
 					break;
-					
+
 					default:
 					$arch = '--';
 					break;
@@ -1564,52 +1564,52 @@ playerSession('write',$db,'playerid',$playerid);
 		playerSession('write',$db,'hwplatform','RaspberryPi');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '02':
 		playerSession('write',$db,'hwplatform','UDOO');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '03':
 		playerSession('write',$db,'hwplatform','CuBox');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '04':
 		playerSession('write',$db,'hwplatform','BeagleBone Black');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '05':
 		playerSession('write',$db,'hwplatform','Compulab Utilite');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '06':
 		playerSession('write',$db,'hwplatform','Wandboard');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '07':
 		playerSession('write',$db,'hwplatform','Cubieboard');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '08':
 		playerSession('write',$db,'hwplatform','RaspberryPi2');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		case '09':
 		playerSession('write',$db,'hwplatform','Odroid-C1');
 		playerSession('write',$db,'hwplatformid',$arch);
 		break;
-		
+
 		default:
 		playerSession('write',$db,'hwplatform','unknown');
 		playerSession('write',$db,'hwplatformid',$arch);
-		
-	
+
+
 
 	}
 }
@@ -1636,7 +1636,7 @@ function wrk_sysEnvCheck($arch,$install) {
 //	 if (md5_file($a) != md5_file($b)) {
 //	 sysCmd('cp '.$b.' '.$a);
 //	 }
-	 
+
 	 // /etc/samba/smb.conf
 //	 $a = '/etc/samba/smb.conf';
 //	 $b = '/var/www/_OS_SETTINGS/etc/samba/smb.conf';
@@ -1674,7 +1674,7 @@ function wrk_sysEnvCheck($arch,$install) {
 	 sysCmd('cp '.$b.' '.$a.' ');
 	 $restartphp = 1;
 	 }
-	 
+
 		if ($install == 1) {
 		 // remove autoFS for NAS mount
 		 sysCmd('cp /var/www/_OS_SETTINGS/etc/auto.master /etc/auto.master');
@@ -1688,7 +1688,7 @@ function wrk_sysEnvCheck($arch,$install) {
 		 sysCmd('cp /var/www/_OS_SETTINGS/etc/php5/fpm/pool.d/* /etc/php5/fpm/pool.d/');
 		 $restartphp = 1;
 		}
-		
+
 	 // /etc/php5/fpm/pool.d/command.conf
 	 $a = '/etc/php5/fpm/pool.d/command.conf';
 	 $b = '/var/www/_OS_SETTINGS/etc/php5/fpm/pool.d/command.conf';
@@ -1731,23 +1731,23 @@ function wrk_sysEnvCheck($arch,$install) {
 		if (isset($reboot) && $reboot == 1) {
 		sysCmd('reboot');
 		}
-	}	
+	}
 }
-
 
 function alsa_findHwMixerControl($device) {
-if (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberryplus') {
-$hwmixerdev = 'Playback Digital';
-} elseif (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberry') {
-$hwmixerdev = 'Playback Digital';
-} elseif (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Iqaudio') {
-$hwmixerdev = 'Playback Digital';
-} else {
-$cmd = "amixer -c ".$device." |grep \"mixer control\"";
-$str = sysCmd($cmd);
-$hwmixerdev = substr(substr($str[0], 0, -(strlen($str[0]) - strrpos($str[0], "'"))), strpos($str[0], "'")+1);
-}
-return $hwmixerdev;
+	$mixer_name = 'Digital';
+	if (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberryplus') {
+		$hwmixerdev = $mixer_name;
+	} elseif (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberry') {
+		$hwmixerdev = $mixer_name;
+	} elseif (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Iqaudio') {
+		$hwmixerdev = $mixer_name;
+	} else {
+		$cmd = "amixer -c ".$device." |grep \"mixer control\"";
+		$str = sysCmd($cmd);
+		$hwmixerdev = substr(substr($str[0], 0, -(strlen($str[0]) - strrpos($str[0], "'"))), strpos($str[0], "'")+1);
+	}
+	return $hwmixerdev;
 }
 
 function ui_notify($notify) {
@@ -1827,7 +1827,7 @@ function ami($sz=null) {
 				'credits'
 				))?'active':'');
 			break;
-	}	
+	}
 }
 
 function current_item($sez=null) {
