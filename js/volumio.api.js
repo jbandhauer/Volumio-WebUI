@@ -22,7 +22,7 @@
  *  - v1, 1.1: Simone De Gregori (aka Orion)
  *  - v2: Michelangelo Guarise
  *  - v2: Joel Takvorian
- * 
+ *
  *  file:                    volumio.api.js
  *  version:                 2
  */
@@ -225,11 +225,11 @@ function pluginListItem(id, text, faicon, onclick) {
         + text + '</div></li>';
 }
 
-function parseResponse(inputArr,respType,i,inpath) {		
+function parseResponse(inputArr,respType,i,inpath) {
 	var content = "";
 
 	switch (respType) {
-		case 'playlist':		
+		case 'playlist':
 			// code placeholder
 		break;
 
@@ -270,7 +270,7 @@ function parseResponse(inputArr,respType,i,inpath) {
 					// Strip the leading path and trailing '.pls', and display only the filename
 					content += inputArr[i].file.replace(inpath + '/', '').replace('.pls', '') + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
 					content += '</div></li>';
-					
+
 				}
 
 			} else if (inputArr[i].Type == 'MpdDirectory') {
@@ -300,7 +300,7 @@ function parseResponse(inputArr,respType,i,inpath) {
 					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spinner icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
 				}
- 
+
 				if (inputArr[i].DisplayName) {
 				// If a DisplayName is available for this entry, use it
 					content += inputArr[i].DisplayName;
@@ -368,10 +368,10 @@ content += '"><div class="db-icon db-spop db-browse"><i class="fa fa-spotify sx 
 
 				content += '</div></li>';
 
-			}	
+			}
 
 		break;
-		
+
 	}
 
 	return content;
@@ -495,7 +495,17 @@ function updateGUI(objectInputState){
 	$('#total').html(timeConvert(objectInputState['time']));
 	//$('#time').val(objectInputState['song_percent']).trigger('change');
 
-	var fileinfo = (objectInputState['audio_channels'] && objectInputState['audio_sample_depth'] && objectInputState['audio_sample_rate']) ? (objectInputState['audio_channels'] + ' - ' + objectInputState['audio_sample_depth'] + ' bit - ' + objectInputState['audio_sample_rate'] +' kHz ') : '&nbsp;';
+	var fileinfo = (objectInputState['audio_channels'] &&
+                  objectInputState['audio_sample_depth'] &&
+                  objectInputState['audio_sample_rate'] &&
+                  objectInputState['bitrate'] &&
+                  objectInputState['fileext']) ?
+    (objectInputState['audio_channels'] + ' - ' +
+     objectInputState['audio_sample_depth'] + ' bit - ' +
+     objectInputState['audio_sample_rate'] + ' kHz - ' +
+     objectInputState['bitrate'] + ' ' +
+     objectInputState['fileext'].toLowerCase())
+    : '&nbsp;';
 	$('#format-bitrate').html(fileinfo);
 
 	$('#playlist-position').html('Playlist position ' + (parseInt(objectInputState['song']) + 1) +'/'+objectInputState['playlistlength']);
