@@ -8,13 +8,13 @@
 			<span id="currentalbum"></span>
 			<span id="playlist-position">&nbsp;</span>
 			<span id="format-bitrate"></span>
-			<div class="social">                       
+			<div class="social">
 				<a class="tweet" id="twbutton" title="Share On Twitter" href="http://volumio.org" target="_blank"><i class="fa fa-twitter"></i></a>
 				<a class="facebook" id="fbbutton"title="Share On Facebook" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-				<a class="googleplus" id="gbutton"title="Share On Google+" href="http://volumio.org" target="_blank"><i class="fa fa-google-plus"></i></a>	
+				<a class="googleplus" id="gbutton"title="Share On Google+" href="http://volumio.org" target="_blank"><i class="fa fa-google-plus"></i></a>
 				</div>
 			<div class="row-fluid">
-			
+
 				<div class="span4">
 					<div id="timeknob">
 						<div id="countdown" ms-user-select="none">
@@ -28,14 +28,14 @@
 							<a id="repeat" class="btn btn-cmd btn-toggle" href="#notarget" title="Repeat"><i class="fa fa-repeat"></i></a>
 							<a id="random" class="btn btn-cmd btn-toggle" href="#notarget" title="Random"><i class="fa fa-random"></i></a>
 							<a id="single" class="btn btn-cmd btn-toggle" href="#notarget" title="Single"><i class="fa fa-refresh"></i></a>
-							<a id="consume" class="btn btn-cmd btn-toggle" href="#notarget" title="Consume Mode"><i class="fa fa-trash"></i></a>			
+							<a id="consume" class="btn btn-cmd btn-toggle" href="#notarget" title="Consume Mode"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="span4"></div> 
+				<div class="span4"></div>
 
 				<div class="span4 volume">
-					<input class="volumeknob" id="volume" data-width="211" data-cursor="true" data-bgColor="#34495E" data-fgColor="#4BBE87" data-thickness=".25" data-angleArc="250" data-angleOffset="-125" data-skin="tron" value="66">	
+					<input class="volumeknob" id="volume" data-width="211" data-cursor="true" data-bgColor="#34495E" data-fgColor="#4BBE87" data-thickness=".25" data-angleArc="250" data-angleOffset="-125" data-skin="tron" value="66">
 					<div class="btn-toolbar floatright">
 						<div class="btn-group">
 							<a id="volumedn" class="btn btn-cmd btn-volume" href="#notarget"><i class="fa fa-volume-down"></i></a>
@@ -49,7 +49,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- -------------------- DATABASE PANEL -------------------- -->
 	<div id="panel-sx" class="tab-pane">
 		<div class="btnlist btnlist-top">
@@ -61,7 +61,7 @@
 			</form>
 			<div id="db-back">
 				<button class="btn"><i class="fa fa-arrow-left sx"></i> <em id="db-back-text">back</em></button>
-			
+
 			<span id="webradio-add">
 				<a href="#webradio-modal" data-toggle="modal" title="Add New WebRadio"><button class="btn"><i class="fa fa-plus"></i><em id="webradio-add-text"></em></button></a>
 			</span>
@@ -81,9 +81,9 @@
 			<div id="db-currentpath">
 				<i class="fa fa-folder-open"></i> <span>NAS/</span>
 			</div>
-		</div>		
+		</div>
 	</div>
-	
+
 	<!-- -------------------- PLAYLIST PANEL -------------------- -->
 	<div id="panel-dx" class="tab-pane">
 		<div class="btnlist btnlist-top">
@@ -101,7 +101,7 @@
 			</ul>
 		</div>
 		<div class="btnlist btnlist-bottom">
-		
+
 			<div id="pl-controls">
 				<form id="pl-save" method="post" onSubmit="return false;">
                                 	<div class="input-append">
@@ -113,7 +113,7 @@
 				<button class="btn pl-firstPage"><i class="fa fa-angle-double-up"></i></button>
 				<button class="btn pl-lastPage"><i class="fa fa-angle-double-down"></i></button>
 			</div>
-			<form id="clearqueue" method="post">	
+			<form id="clearqueue" method="post">
 			<input class="btn" type="submit" name="syscmd" value="Clear Queue" id="syscmd-clearqueue">
 			</form>
 		</div>
