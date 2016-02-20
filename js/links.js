@@ -5,8 +5,8 @@ $(document).on(
 
     // If this is the menu-settings icon (top right) just return
     // without modifying anything
-	if ( this.id == "menu-settings" ) { return; } 
-	
+	if ( this.id == "menu-settings" ) { return; }
+
         if (!$(this).hasClass("external") ) {
             event.preventDefault();
             if (!$(event.target).attr("href")) {

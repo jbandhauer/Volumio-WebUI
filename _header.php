@@ -20,19 +20,19 @@
  *
  *
  *  version:	1.1-dev
- * 
+ *
  *  Andrea Coiutti (aka ACX)
  *  PlayerUI frontend design - frontend HTML/JS/CSS coding
- * 
- *  Simone De Gregori (aka Orion) 
+ *
+ *  Simone De Gregori (aka Orion)
  *  PlayerUI PHP backend coding - frontend JS coding - OS optimization
- * 
+ *
  *
  *  RaspyFi Project (C) 2013 Michelangelo Guarise (OS image build/customization)
  *
  *  RaspyFi Logo design (C) 2013 Daniele Busciantella Ricci
  *
- */ 
+ */
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -61,8 +61,8 @@
       <script src="js/html5shiv.js"></script>
     <![endif]-->
 
-    <!-- allows removal of the mobile safari window dressing when 
-         added to the home screen of an iOS app. Also requires 
+    <!-- allows removal of the mobile safari window dressing when
+         added to the home screen of an iOS app. Also requires
          link.js which is included below -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -85,7 +85,7 @@
 			<li><a href="#poweroff-modal" data-toggle="modal"><i class="fa fa-power-off sx"></i> Turn off</a></li>
 		</ul>
 	</div>
-	<div class="playback-controls">	
+	<div class="playback-controls">
 		<button id="previous" class="btn btn-cmd" title="Previous"><i class="fa fa-step-backward"></i></button>
 		<button id="stop" class="btn btn-cmd" title="Stop"><i class="fa fa-stop"></i></button>
 		<button id="play" class="btn btn-cmd" title="Play/Pause"><i class="fa fa-play"></i></button>

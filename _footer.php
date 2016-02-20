@@ -20,7 +20,7 @@
 			<h3 id="webradio-modal-label">Add New WebRadio</h3>
 		</div>
 		<div class="modal-body">
-			<form action="settings.php" method="POST">	
+			<form action="settings.php" method="POST">
 		<input name="radio-name" type="text" placeholder="WebRadio Name" />
 		<input name="radio-url" type="text" placeholder="WebRadio URL"/>
 		</form>
@@ -40,7 +40,7 @@
 			<h3 id="update-modal-label">Add New WebRadio</h3>
 		</div>
 		<div class="modal-body">
-			<form action="updates/check_updates.php" method="POST">	
+			<form action="updates/check_updates.php" method="POST">
 		Cose varie da dire
 		</form>
 		</div>
@@ -67,8 +67,8 @@
 <script src="js/volumio.library.js"></script>
 
 <!-- 'fixes' links to other pages so that when saved to the homescreen
-     on a iOS device all the links stay within the app 
-	 Note from mikelangeloz -- 
+     on a iOS device all the links stay within the app
+	 Note from mikelangeloz --
 	 This breaks Dropdown menus, needs to be fixed
 <script type="text/javascript" src="js/links.js"></script>
 -->

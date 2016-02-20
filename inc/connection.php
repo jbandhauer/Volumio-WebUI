@@ -21,12 +21,12 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							connection.php
  * version:						1.0
  *
  */
- 
+
 require('config.inc');
 error_reporting(ERRORLEVEL);
 // include player library

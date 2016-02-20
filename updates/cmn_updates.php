@@ -19,7 +19,7 @@
  *
  *  Authors:
  *  - v1: Joel Takvorian
- * 
+ *
  *  file:                    cmn_updates.php
  *  version:                 1
  */

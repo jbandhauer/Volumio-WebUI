@@ -19,7 +19,7 @@
  *
  *  Authors:
  *  - v1: Joel Takvorian
- * 
+ *
  *  file:                    run_updates.php
  *  version:                 1
  */
@@ -53,10 +53,10 @@ function runFirstUpdateDb() {
 }
 ?>
 
-        
-      
-          
-<?php 
+
+
+
+<?php
 // Ensure DB file is present (else, create it from dump) and that it contains at least the "udpates" table (else, create it)
 function checkDbSetup() {
     global $dbh;
@@ -102,7 +102,7 @@ function runUpdate($name, $version) {
 function flagInstalled($name, $version) {
     global $dbh;
     $stmt = $dbh->prepare("REPLACE INTO updates VALUES('$name', $version)");
-    $stmt->execute(); 
+    $stmt->execute();
 }
 
 function checkForUpdates() {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
  *		 Tsunamp Team
@@ -21,24 +21,24 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							dev.php
  * version:						1.0
  *
  */
- 
+
 // common include
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 playerSession('unlock',$db,'','');
 ?>
 
 <?php
 if (isset($_POST['syscmd'])){
 	switch ($_POST['syscmd']) {
-	
+
 	case 'reboot':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -55,9 +55,9 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-		
+
 	case 'poweroff':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -72,9 +72,9 @@ if (isset($_POST['syscmd'])){
 			echo "background worker busy";
 			}
 		break;
-		
+
 	case 'mpdrestart':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -89,9 +89,9 @@ if (isset($_POST['syscmd'])){
 			echo "background worker busy";
 			}
 		break;
-		
+
 	case 'phprestart':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -108,9 +108,9 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-	
+
 	case 'syschmod':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -126,7 +126,7 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-	
+
 	case 'blankplayerid':
 		session_start();
 		playerSession('write',$db,'playerid','');
@@ -134,9 +134,9 @@ if (isset($_POST['syscmd'])){
 		playerSession('write',$db,'hwplatformid','');
 		playerSession('unlock');
 		break;
-		
+
 	case 'phpclearcache':
-	
+
 		sleep(2);
 		apc_clear_cache();
 		apc_clear_cache('opcode');
@@ -145,9 +145,9 @@ if (isset($_POST['syscmd'])){
 		$_SESSION['notify']['msg'] = 'PHP APC Cache cleared';
 		playerSession('unlock');
 		break;
-	
+
 	case 'workerrestart':
-			
+
 			// reset worker status
 			session_start();
 			$_SESSION['w_queue'] = '';
@@ -163,9 +163,9 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-	
+
 	case 'workersessionreset':
-	
+
 		session_start();
 		$_SESSION['w_queue'] = '';
 		$_SESSION['w_queueargs'] = '';
@@ -176,9 +176,9 @@ if (isset($_POST['syscmd'])){
 		$_SESSION['notify']['msg'] = 'PHP worker Session DATA cleared';
 		playerSession('unlock');
 		break;
-		
+
 	case 'backup':
-			
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -208,13 +208,13 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-		
+
 	case 'totalbackup':
-		
+
 		break;
-		
+
 	case 'restore':
-		
+
 		break;
 	}
 
@@ -240,7 +240,7 @@ if (isset($_POST['save'])){
 }
 
 if (isset($_POST['cmediafix']) && $_POST['cmediafix'] != $_SESSION['cmediafix']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -282,9 +282,9 @@ playerSession('unlock');
 waitWorker(1);
 ?>
 
-<?php 
+<?php
 $sezione = basename(__FILE__, '.php');
-include('_header.php'); 
+include('_header.php');
 ?>
 
 <div class="container">
@@ -295,9 +295,9 @@ include('_header.php');
 			<p>
 				We provide different debug levels:<br><br>
 				<span class="help-block">defcon[0]: no debug output (default) </span>
-				<span class="help-block">defcon[1]: output system stats and some informations about Audio backend</span> 
-				<span class="help-block">defcon[2]: output same as defcon[1] and UI PHP SESSION status</span> 
-				<span class="help-block">defcon[3]: output ALL debug info (add SQLite datastore content)</span> 
+				<span class="help-block">defcon[1]: output system stats and some informations about Audio backend</span>
+				<span class="help-block">defcon[2]: output same as defcon[1] and UI PHP SESSION status</span>
+				<span class="help-block">defcon[3]: output ALL debug info (add SQLite datastore content)</span>
 			</p>
 			<div class="control-group">
 				<label class="control-label">Debug level</label>
@@ -310,7 +310,7 @@ include('_header.php');
 					</select>
 				</div>
 			</div>
-			
+
 			<div class="control-group">
 				<label class="control-label">Hide debug informations</label>
 				<div class="controls">
@@ -355,7 +355,7 @@ include('_header.php');
 				<div class="controls">
 					<input class="btn" type="submit" name="syscmd" value="mpdrestart" id="syscmd-mpdrestart">
 				</div>
-			</div>			
+			</div>
 			<div class="control-group">
 				<label class="control-label">reset NET config</label>
 				<div class="controls">
@@ -387,13 +387,13 @@ include('_header.php');
 				<div class="controls">
 					<input class="btn" type="submit" name="syscmd" value="phprestart" id="syscmd-phprestart">
 				</div>
-			</div> 
+			</div>
 			<div class="control-group">
 				<label class="control-label">Clear PHP APC cache</label>
 				<div class="controls">
 					<input class="btn" type="submit" name="syscmd" value="phpclearcache" id="syscmd-phpclearcache">
 				</div>
-			</div>			
+			</div>
 			<div class="control-group">
 				<label class="control-label">View PHP APC status</label>
 				<div class="controls">
@@ -417,7 +417,7 @@ include('_header.php');
 			</div>
 		</fieldset>
 	</form>
-	
+
 	<form class="form-horizontal" method="post">
 		<fieldset>
 			<legend>Background WORKER control</legend>
@@ -427,16 +427,16 @@ include('_header.php');
 				<div class="controls">
 					<input class="btn" type="submit" name="syscmd" value="workerrestart" id="syscmd-workerrestart">
 				</div>
-			</div>	
+			</div>
 			<div class="control-group">
 				<label class="control-label">reset WORKER session</label>
 				<div class="controls">
 					<input class="btn" type="submit" name="syscmd" value="workersessionreset" id="syscmd-workersessionreset">
 				</div>
-			</div>	
+			</div>
 		</fieldset>
 	</form>
-	
+
 	<form class="form-horizontal" method="post">
 		<fieldset>
 			<legend>Compatibility fixes</legend>
@@ -450,7 +450,7 @@ include('_header.php');
 						<label class="toggle-radio" for="toggleOption8">OFF</label>
 						<input type="radio" name="cmediafix" id="toggleOption7" value="0" <?php if ($_SESSION['cmediafix'] == 0) echo "checked=\"checked\""; ?>>
 					</div>
-					<span class="help-block">For those who have a CM6631 receiver and experiment issues (noise, crackling) between tracks with different sample rates and/or bit depth.<br> 
+					<span class="help-block">For those who have a CM6631 receiver and experiment issues (noise, crackling) between tracks with different sample rates and/or bit depth.<br>
 					A "dirty" fix that should avoid the problem, do NOT use if everything works normally.</span>
 				</div>
 			</div>

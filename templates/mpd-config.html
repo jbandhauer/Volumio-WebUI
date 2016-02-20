@@ -3,24 +3,24 @@
     <p>If you mess up with this configuration you can <a data-toggle="modal" href="#mpd-config-defaults">reset to default</a>.</p>
     <form class="form-horizontal" data-validate="parsley" action="" method="post">
         <fieldset>
-		
+
             <legend>Audio Output</legend>
             <p>Here you can select your desired output option. Default is onboard DAC, if any. At the moment, Volumio supports only one Output at the time. </p>
             <br>
             <div class="control-group">
 			<label class="control-label" for="mixer-type">Audio Output</label>
 			<div class="controls">
-	
+
                     <select id="device" name="conf[device]" class="input-large">
-					
+
 					$_mpd_select[device]
-					
+
                     </select>
 				</div>
             </div>
         </fieldset>
-                    
-			
+
+
         </fieldset>
         <fieldset>
             <legend>Volume control mixer</legend>
@@ -29,11 +29,11 @@
             <div class="control-group">
                 <label class="control-label" for="mixer-type">Mixer type</label>
                 <div class="controls">
-	
+
                     <select id="mixer-type" name="conf[mixer_type]" class="input-large">
 
 					$_mpd_select[mixer_type]
-					
+
                     </select>
 
                     <span class="help-block"><span class="help-block">
@@ -64,8 +64,8 @@
                         <option value="default"  >default</option>
                         <option value="secure"  >secure</option>
                         <option value="verbose" >verbose</option>
-                    </select> 
-					
+                    </select>
+
                     <span class="help-block">This setting controls the type of information which is logged. Available setting arguments are "default", "secure" or "verbose".
                     The "verbose" setting argument is recommended for troubleshooting, though can quickly stretch available resources on limited hardware storage.</span>
                 </div>
@@ -74,9 +74,9 @@
                 <label class="control-label" for="gapless-mp3-playback">Gapless mp3 playback</label>
                 <div class="controls">
 					<select id="gapless-mp3-playback" name="conf[gapless_mp3_playback]" class="input-large">
-					
+
 					$_mpd_select[gapless_mp3_playback]
-					
+
 					</select>
 
                     <span class="help-block">If you have a problem with your MP3s ending abruptly it is recommended that you set this argument to "no" to attempt to fix the problem. </span>
@@ -87,9 +87,9 @@
                 <label class="control-label" for="dop">DSD over PCM</label>
                 <div class="controls">
 					<select id="dop" name="conf[dop]" class="input-large">
-					
+
 					$_mpd_select[dop]
-					
+
 					</select>
 
                     <span class="help-block">Enable DSD over PCM, disabling direct DSD playback. Enable this only if DSD Playback doesn't work for you.</span>
@@ -100,9 +100,9 @@
                 <label class="control-label" for="dsd-usb">Volume normalization</label>
                 <div class="controls">
 					<select id="volume-normalization" name="conf[volume_normalization]" class="input-large">
-					
+
 					$_mpd_select[volume_normalization]
-					
+
 					</select>
 
                     <span class="help-block">If yes, mpd will normalize the volume of songs as they play. The default is no</span>
@@ -121,25 +121,25 @@
                 <label class="control-label" for="dsd-usb">Buffer before play</label>
                 <div class="controls">
 					<select id="buffer-before-play" name="conf[buffer_before_play]" class="input-large">
-					
+
 					$_mpd_select[buffer_before_play]
-					
+
 					</select>
 
                     <span class="help-block"> This specifies how much of the audio buffer should be filled before playing a song. Try increasing this if you hear skipping when manually changing songs. The default is 10%, a little over 1 second of CD-quality audio with the default buffer size</span>
                 </div>
             </div>
-			
+
             <div class="control-group">
                 <label class="control-label" for="auto-update">Auto update</label>
                 <div class="controls">
 
                     <select id="auto-update" name="conf[auto_update]" class="input-large">
 
-					$_mpd_select[auto_update] 
-					
+					$_mpd_select[auto_update]
+
                     </select>
-	
+
                     <span class="help-block">This setting enables automatic update of music database when files in music_directory are changed.</span>
                 </div>
             </div>
@@ -158,14 +158,14 @@
                 <div class="controls">
 
                     <select id="zeroconf-enabled" name="conf[zeroconf_enabled]" class="input-large">
-   
-					$_mpd_select[zeroconf_enabled] 
-   
+
+					$_mpd_select[zeroconf_enabled]
+
                     </select>
 
                     <span class="help-block">If this setting is set to "yes", service information will be published with Zeroconf / Avahi.</span>
                 </div>
-            </div> 
+            </div>
             <div class="control-group">
                 <label class="control-label" for="zeroconf-name">Zeroconf name</label>
                 <div class="controls">
@@ -175,7 +175,7 @@
             </div>
         </fieldset>-->
 		<fieldset>
-		
+
             <legend>Resampling</legend>
             <p>Here you can set Up or Downsampling. Set the desired bit-depth and resolution and the desired Resampling algorithm.</p>
             <br>
@@ -183,11 +183,11 @@
 			<label class="control-label" for="audio-output-format">Audio output format (resampling)</label>
 				<br>
                 <div class="controls">
-	
+
                     <select id="audio-output-format" name="conf[audio_output_format]" class="input-large">
-					
+
 					$_mpd_select[audio_output_format]
-					
+
                     </select>
 
                     <span class="help-block">This setting will change all decoded audio to be converted to the specified format before being passed to the audio outputs. By default, this setting is disabled.</span>
@@ -196,9 +196,9 @@
             <div class="control-group">
                 <label class="control-label" for="samplerate-converter">Sample rate converter</label>
                 <div class="controls">
-	
+
                     <select id="samplerate_converter" name="conf[samplerate_converter]" class="input-large">
-                        
+
 						$_mpd_select[samplerate_converter]
                     </select>
 
@@ -210,9 +210,9 @@
 					Best Sinc Interpolator provides the best quality playback but it's the most resource intensive, so if you experience drop-offs or clicks, just try the medium or fastest sinc interpolators.
 
 </span>
-					
+
                 </div>
-            </div> 
+            </div>
         </fieldset>
 		<div class="form-actions">
             <button type="button" class="btn btn-large">Cancel</button>
@@ -220,9 +220,9 @@
         </div>
 
 
-			
-            
-        
+
+
+
     </form>
 </div>
 <div id="mpd-config-defaults" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mpd-config-defaults-label" aria-hidden="true">
@@ -235,7 +235,7 @@
 				<p>You are going to reset the configuration to the default original values.<br>
 				You will lose any modification.</p>
 			</div>
-			
+
 			<div class="modal-footer">
 			<input type="hidden" name="reset" value="1">
 				<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

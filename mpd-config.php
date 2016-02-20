@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
  *		 Tsunamp Team
@@ -21,15 +21,15 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							mpd-config.php
  * version:						1.0
  *
  */
- 
+
 // common include
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 $dbh = cfgdb_connect($db);
 session_write_close();
 ?>
@@ -80,7 +80,7 @@ if(isset($_POST['conf']) && !empty($_POST['conf'])) {
 		session_write_close();
 		}
 }
-	
+
 // handle manual config
 if(isset($_POST['mpdconf']) && !empty($_POST['mpdconf'])) {
 // tell worker to write new MPD config
@@ -129,12 +129,12 @@ $_mpd = array (
 										'device' => '',
 										'volume_normalization' => ''
 									);
-//debug($mpdconf);							
+//debug($mpdconf);
 // parse output for template $_mpdconf
 foreach ($mpdconf as $key => $value) {
 	foreach ($_mpd as $key2 => $value2) {
 		if ($value['param'] == $key2) {
-		$_mpd[$key2] = $value['value_player'];	
+		$_mpd[$key2] = $value['value_player'];
 		}
 	}
 }
@@ -142,12 +142,12 @@ foreach ($mpdconf as $key => $value) {
 // setup select dropdown menu for template
 
 // gapeless_mp3_playback
-$_mpd_select['gapless_mp3_playback'] .= "<option value=\"yes\" ".(($_mpd['gapless_mp3_playback'] == 'yes') ? "selected" : "")." >yes</option>\n";	
+$_mpd_select['gapless_mp3_playback'] .= "<option value=\"yes\" ".(($_mpd['gapless_mp3_playback'] == 'yes') ? "selected" : "")." >yes</option>\n";
 $_mpd_select['gapless_mp3_playback'] .= "<option value=\"no\" ".(($_mpd['gapless_mp3_playback'] == 'no') ? "selected" : "")." >no</option>\n";
 
 // dsd_dop
-$_mpd_select['dop'] .= "<option value=\"yes\" ".(($_mpd['dop'] == 'yes') ? "selected" : "")." >yes</option>\n";	
-$_mpd_select['dop'] .= "<option value=\"no\" ".(($_mpd['dop'] == 'no') ? "selected" : "")." >no</option>\n";	
+$_mpd_select['dop'] .= "<option value=\"yes\" ".(($_mpd['dop'] == 'yes') ? "selected" : "")." >yes</option>\n";
+$_mpd_select['dop'] .= "<option value=\"no\" ".(($_mpd['dop'] == 'no') ? "selected" : "")." >no</option>\n";
 
 
 //output device names
@@ -157,36 +157,36 @@ $dev3 = file_get_contents('/proc/asound/card2/id');
 $dev4 = file_get_contents('/proc/asound/card3/id');
 
 // output devices  selector
-$_mpd_select['device'] .= "<option value=\"0\" ".(($_mpd['device'] == '0') ? "selected" : "")." >$dev1</option>\n";	
-$_mpd_select['device'] .= "<option value=\"1\" ".(($_mpd['device'] == '1') ? "selected" : "")." >$dev2</option>\n";	
+$_mpd_select['device'] .= "<option value=\"0\" ".(($_mpd['device'] == '0') ? "selected" : "")." >$dev1</option>\n";
+$_mpd_select['device'] .= "<option value=\"1\" ".(($_mpd['device'] == '1') ? "selected" : "")." >$dev2</option>\n";
 $_mpd_select['device'] .= "<option value=\"2\" ".(($_mpd['device'] == '2') ? "selected" : "")." >$dev3</option>\n";
 $_mpd_select['device'] .= "<option value=\"3\" ".(($_mpd['device'] == '3') ? "selected" : "")." >$dev4</option>\n";
 
 // volume_normalization
-$_mpd_select['volume_normalization'] .= "<option value=\"yes\" ".(($_mpd['volume_normalization'] == 'yes') ? "selected" : "")." >yes</option>\n";	
-$_mpd_select['volume_normalization'] .= "<option value=\"no\" ".(($_mpd['volume_normalization'] == 'no') ? "selected" : "")." >no</option>\n";	
+$_mpd_select['volume_normalization'] .= "<option value=\"yes\" ".(($_mpd['volume_normalization'] == 'yes') ? "selected" : "")." >yes</option>\n";
+$_mpd_select['volume_normalization'] .= "<option value=\"no\" ".(($_mpd['volume_normalization'] == 'no') ? "selected" : "")." >no</option>\n";
 
 // buffer_before_play
-$_mpd_select['buffer_before_play'] .= "<option value=\"0%\" ".(($_mpd['buffer_before_play'] == '0%') ? "selected" : "")." >disabled</option>\n";	
-$_mpd_select['buffer_before_play'] .= "<option value=\"10%\" ".(($_mpd['buffer_before_play'] == '10%') ? "selected" : "")." >10%</option>\n";	
-$_mpd_select['buffer_before_play'] .= "<option value=\"20%\" ".(($_mpd['buffer_before_play'] == '20%') ? "selected" : "")." >20%</option>\n";	
-$_mpd_select['buffer_before_play'] .= "<option value=\"30%\" ".(($_mpd['buffer_before_play'] == '30%') ? "selected" : "")." >30%</option>\n";	
+$_mpd_select['buffer_before_play'] .= "<option value=\"0%\" ".(($_mpd['buffer_before_play'] == '0%') ? "selected" : "")." >disabled</option>\n";
+$_mpd_select['buffer_before_play'] .= "<option value=\"10%\" ".(($_mpd['buffer_before_play'] == '10%') ? "selected" : "")." >10%</option>\n";
+$_mpd_select['buffer_before_play'] .= "<option value=\"20%\" ".(($_mpd['buffer_before_play'] == '20%') ? "selected" : "")." >20%</option>\n";
+$_mpd_select['buffer_before_play'] .= "<option value=\"30%\" ".(($_mpd['buffer_before_play'] == '30%') ? "selected" : "")." >30%</option>\n";
 
 //samplerate_converter
-$_mpd_select['samplerate_converter'] .= "<option value=\"Fastest Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Fastest Sinc Interpolator') ? "selected" : "")." >Fastest Sinc Interpolator</option>\n";	
-$_mpd_select['samplerate_converter'] .= "<option value=\"Medium Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Medium Sinc Interpolator') ? "selected" : "")." >Medium Sinc Interpolator</option>\n";	
-$_mpd_select['samplerate_converter'] .= "<option value=\"Best Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Best Sinc Interpolator') ? "selected" : "")." >Best Sinc Interpolator</option>\n";	
+$_mpd_select['samplerate_converter'] .= "<option value=\"Fastest Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Fastest Sinc Interpolator') ? "selected" : "")." >Fastest Sinc Interpolator</option>\n";
+$_mpd_select['samplerate_converter'] .= "<option value=\"Medium Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Medium Sinc Interpolator') ? "selected" : "")." >Medium Sinc Interpolator</option>\n";
+$_mpd_select['samplerate_converter'] .= "<option value=\"Best Sinc Interpolator\" ".(($_mpd['samplerate_converter'] == 'Best Sinc Interpolator') ? "selected" : "")." >Best Sinc Interpolator</option>\n";
 
 
 // $_mpd[audio_buffer_size]
 
 // auto_update
-$_mpd_select['auto_update'] .= "<option value=\"yes\" ".(($_mpd['auto_update'] == 'yes') ? "selected" : "").">yes</option>\n";	
+$_mpd_select['auto_update'] .= "<option value=\"yes\" ".(($_mpd['auto_update'] == 'yes') ? "selected" : "").">yes</option>\n";
 $_mpd_select['auto_update'] .= "<option value=\"no\" ".(($_mpd['auto_update'] == 'no') ? "selected" : "").">no</option>\n";
 
 // zeroconf_enabled
-$_mpd_select['zeroconf_enabled'] .= "<option value=\"yes\" ".(($_mpd['zeroconf_enabled'] == 'yes') ? "selected" : "").">yes</option>\n";	
-$_mpd_select['zeroconf_enabled'] .= "<option value=\"no\" ".(($_mpd['zeroconf_enabled'] == 'no') ? "selected" : "").">no</option>\n";																
+$_mpd_select['zeroconf_enabled'] .= "<option value=\"yes\" ".(($_mpd['zeroconf_enabled'] == 'yes') ? "selected" : "").">yes</option>\n";
+$_mpd_select['zeroconf_enabled'] .= "<option value=\"no\" ".(($_mpd['zeroconf_enabled'] == 'no') ? "selected" : "").">no</option>\n";
 
 // audio_output_format
 $_mpd_select['audio_output_format'] .= "<option value=\"disabled\" ".(($_mpd['audio_output_format'] == 'disabled' OR $_mpd['audio_output_format'] == '') ? "selected" : "").">disabled</option>\n";
@@ -229,7 +229,7 @@ if (wrk_checkStrSysfile('/proc/asound/card0/pcm0p/info','bcm2835')) {
 
 <?php
 $sezione = basename(__FILE__, '.php');
-include('_header.php'); 
+include('_header.php');
 ?>
 
 <!-- content --!>
@@ -240,7 +240,7 @@ eval("echoTemplate(\"".getTemplate("templates/$tpl")."\");");
 ?>
 <!-- content -->
 
-<?php 
+<?php
  debug($_POST);
 ?>
 

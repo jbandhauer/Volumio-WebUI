@@ -15,7 +15,7 @@ if (!$spop) {
 			// Wait until the status changes and then return new status
 			$status = getSpopState($spop, "NextState");
 
-		} 
+		}
 
 		// Return data in json format to ajax requester and close socket
 		header('Content-Type: application/json');

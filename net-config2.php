@@ -21,7 +21,7 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							net-config.php
  * version:						1.0
  *
@@ -81,8 +81,8 @@ $dbh  = cfgdb_connect($db);
         // format new config string for eth0
         if ($_POST['eth0']['dhcp'] == 'true' ) {
         $eth0 = "\nauto eth0\nallow-hotplug eth0\niface eth0 inet dhcp\n";
-        }    
-        
+        }
+
         else {
         $eth0 = "\nauto eth0\nallow-hotplug eth0\niface eth0 inet static\n";
         $eth0 .= "address ".$_POST['eth0']['ip']."\n";
@@ -95,17 +95,17 @@ $dbh  = cfgdb_connect($db);
 						$eth0 .= "nameserver ".$_POST['eth0']['dns2']."\n";
 						}
         }//else eth0 static
-        
-        
+
+
         // format new config string for wlan0
         $wlan0 = "\n";
-      
+
     }//if etho dhcp is set
 
     // wlan0
-    if (isset($_POST['wifisec']['ssid']) && !empty($_POST['wifisec']['ssid']) && isset($_POST['wifisec']['password']) && !empty($_POST['wifisec']['password'])) 
+    if (isset($_POST['wifisec']['ssid']) && !empty($_POST['wifisec']['ssid']) && isset($_POST['wifisec']['password']) && !empty($_POST['wifisec']['password']))
     {
-   
+
     $value = array('ssid' => $_POST['wifisec']['ssid'], 'encryption' => $_POST['wifisec']['encryption'], 'password' => $_POST['wifisec']['password']);
     cfgdb_update('cfg_wifisec',$dbh,'',$value);
     $wifisec = cfgdb_read('cfg_wifisec',$dbh);
@@ -118,7 +118,7 @@ $dbh  = cfgdb_connect($db);
        	 if ($_POST['wifisec']['encryption'] == 'wpa') {
         		$wlan0 .= "wpa-ssid ".$_POST['wifisec']['ssid']."\n";
         		$wlan0 .= "wpa-psk ".$_POST['wifisec']['password']."\n";
-        	} 
+        	}
          	else {
           	$wlan0 .= "wireless-essid ".$_POST['wifisec']['ssid']."\n";
             	if ($_POST['wifisec']['encryption'] == 'wep') {
@@ -128,9 +128,9 @@ $dbh  = cfgdb_connect($db);
             	}
          	}//else wep or open
         }//if dhcp for wlan0
-        
+
         else {
-        	
+
         $wlan0 = "\n";
         $wlan0 .= "auto wlan0\n";
         $wlan0 .= "iface wlan0 inet static\n";
@@ -155,18 +155,18 @@ $dbh  = cfgdb_connect($db);
             $wlan0 .= "wireless-mode managed\n";
             }
          }//else wep or open
-        
+
         }//else wlan0 static
-        
-        
+
+
        // format new config string for eth0
         if ($_POST['eth0']['dhcp'] == 'true' ) {
-        	
+
         $eth0 = "\nauto eth0\nallow-hotplug eth0\niface eth0 inet dhcp\n";
-        }    
-        
+        }
+
         else {
-        	
+
         $eth0 = "\nauto eth0\nallow-hotplug eth0\niface eth0 inet static\n";
         $eth0 .= "address ".$_POST['eth0']['ip']."\n";
         $eth0 .= "netmask ".$_POST['eth0']['netmask']."\n";

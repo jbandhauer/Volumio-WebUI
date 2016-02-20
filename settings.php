@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
  *		 Tsunamp Team
@@ -21,24 +21,24 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							settings.php
  * version:						1.1
  *
  */
- 
+
 // common include
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 playerSession('unlock',$db,'','');
 ?>
 
-<?php 
+<?php
 if (isset($_POST['syscmd'])){
 	switch ($_POST['syscmd']) {
 
 	case 'reboot':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -55,9 +55,9 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-		
+
 	case 'poweroff':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -74,7 +74,7 @@ if (isset($_POST['syscmd'])){
 		break;
 
 	case 'mpdrestart':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -89,9 +89,9 @@ if (isset($_POST['syscmd'])){
 			echo "background worker busy";
 			}
 		break;
-	
+
 	case 'backup':
-			
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -121,9 +121,9 @@ if (isset($_POST['syscmd'])){
 		// unlock session file
 		playerSession('unlock');
 		break;
-	
+
 	case 'updatempdDB':
-		
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 				session_start();
 				sendMpdCommand($mpd,'update');
@@ -136,11 +136,11 @@ if (isset($_POST['syscmd'])){
 				echo "background worker busy";
 				playerSession('unlock');
 			}
-			
+
 	break;
-	
+
 	case 'clearqueue':
-			
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			session_start();
 			sendMpdCommand($mpd,'clear');
@@ -155,9 +155,9 @@ if (isset($_POST['syscmd'])){
 			// unlock session file
 			playerSession('unlock');
 	break;
-	
+
 	case 'updateui':
-	
+
 			if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 			// start / respawn session
 			session_start();
@@ -172,15 +172,15 @@ if (isset($_POST['syscmd'])){
 			echo "background worker busy";
 			}
 	break;
-		
+
 	case 'totalbackup':
-		
+
 		break;
-		
+
 	case 'restore':
-		
+
 		break;
-	
+
 	}
 
 }
@@ -192,7 +192,7 @@ if ($arch == '01' || '08') {
     $_divi2s = "class=\"hide\"";
     }
 if (isset($_POST['orionprofile']) && $_POST['orionprofile'] != $_SESSION['orionprofile']){
-	// load worker queue 
+	// load worker queue
 	if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 	// start / respawn session
 	session_start();
@@ -206,7 +206,7 @@ if (isset($_POST['orionprofile']) && $_POST['orionprofile'] != $_SESSION['orionp
 	} else {
 	echo "background worker busy";
 	}
-	
+
 	// activate worker job
 	if ($_SESSION['w_lock'] != 1) {
 	// start / respawn session
@@ -223,7 +223,7 @@ if (isset($_POST['orionprofile']) && $_POST['orionprofile'] != $_SESSION['orionp
 }
 
 if (isset($_POST['cmediafix']) && $_POST['cmediafix'] != $_SESSION['cmediafix']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -243,7 +243,7 @@ if (isset($_POST['cmediafix']) && $_POST['cmediafix'] != $_SESSION['cmediafix'])
 }
 
 if (isset($_POST['shairport']) && $_POST['shairport'] != $_SESSION['shairport']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -263,7 +263,7 @@ if (isset($_POST['shairport']) && $_POST['shairport'] != $_SESSION['shairport'])
 }
 
 if (isset($_POST['upnpmpdcli']) && $_POST['upnpmpdcli'] != $_SESSION['upnpmpdcli']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -283,7 +283,7 @@ if (isset($_POST['upnpmpdcli']) && $_POST['upnpmpdcli'] != $_SESSION['upnpmpdcli
 }
 
 if (isset($_POST['djmount']) && $_POST['djmount'] != $_SESSION['djmount']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -303,7 +303,7 @@ if (isset($_POST['djmount']) && $_POST['djmount'] != $_SESSION['djmount']){
 }
 
 if (isset($_POST['minidlna']) && $_POST['minidlna'] != $_SESSION['minidlna']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -323,7 +323,7 @@ if (isset($_POST['minidlna']) && $_POST['minidlna'] != $_SESSION['minidlna']){
 }
 
 if (isset($_POST['startupsound']) && $_POST['startupsound'] != $_SESSION['startupsound']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -343,7 +343,7 @@ if (isset($_POST['startupsound']) && $_POST['startupsound'] != $_SESSION['startu
 }
 
 if (isset($_POST['hostname']) && $_POST['hostname'] != $_SESSION['hostname']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -375,7 +375,7 @@ if (isset($_POST['hostname']) && $_POST['hostname'] != $_SESSION['hostname']){
 
 //Library Display
 if (isset($_POST['displaylib']) && $_POST['displaylib'] != $_SESSION['displaylib']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -395,7 +395,7 @@ if (isset($_POST['displaylib']) && $_POST['displaylib'] != $_SESSION['displaylib
 }
 
 if (isset($_POST['displaylibastab']) && $_POST['displaylibastab'] != $_SESSION['displaylibastab']){
-	// load worker queue 
+	// load worker queue
 	// start / respawn session
 	session_start();
 	// save new value on SQLite datastore
@@ -424,7 +424,7 @@ dtoverlay=hifiberry-dac';
 	// unlock session file
 	playerSession('unlock');
 		break;
-	
+
 	case 'Hifiberryplus':
 		session_start();
 	$file = '/boot/config.txt';
@@ -436,9 +436,9 @@ dtoverlay=hifiberry-dacplus';
 	// save new value on SQLite datastore
 	playerSession('write',$db,'i2s',$_POST['i2s']);
 	// unlock session file
-	playerSession('unlock');	
+	playerSession('unlock');
 		break;
-		
+
 	case 'HifiberryDigi':
 			session_start();
 	$file = '/boot/config.txt';
@@ -452,7 +452,7 @@ dtoverlay=hifiberry-digi';
 	// unlock session file
 	playerSession('unlock');
 	break;
-	
+
 	case 'HifiberryAmp':
 			session_start();
 	$file = '/boot/config.txt';
@@ -466,7 +466,7 @@ dtoverlay=hifiberry-amp';
 	// unlock session file
 	playerSession('unlock');
 	break;
-	
+
 	case 'Iqaudio':
 		session_start();
 	$file = '/boot/config.txt';
@@ -478,9 +478,9 @@ dtoverlay=iqaudio-dac';
 	// save new value on SQLite datastore
 	playerSession('write',$db,'i2s',$_POST['i2s']);
 	// unlock session file
-	playerSession('unlock');	
+	playerSession('unlock');
 		break;
-		
+
 	case 'IqaudioDacPlus':
 		session_start();
 	$file = '/boot/config.txt';
@@ -492,9 +492,9 @@ dtoverlay=iqaudio-dacplus';
 	// save new value on SQLite datastore
 	playerSession('write',$db,'i2s',$_POST['i2s']);
 	// unlock session file
-	playerSession('unlock');	
-		break;	
-	
+	playerSession('unlock');
+		break;
+
 	case 'RpiDac':
 		session_start();
 	$file = '/boot/config.txt';
@@ -508,9 +508,9 @@ dtoverlay=rpi-dac';
 	// unlock session file
 	playerSession('unlock');
 		break;
-		
-	
-		
+
+
+
 	case 'Generic':
 		session_start();
 	$file = '/boot/config.txt';
@@ -522,9 +522,9 @@ dtoverlay=rpi-dac';
 	// save new value on SQLite datastore
 	playerSession('write',$db,'i2s',$_POST['i2s']);
 	// unlock session file
-	playerSession('unlock');	
+	playerSession('unlock');
 		break;
-	
+
 	case 'i2soff':
 		session_start();
 	$file = '/boot/config.txt';
@@ -534,7 +534,7 @@ hdmi_drive=2h';
 	// save new value on SQLite datastore
 	playerSession('write',$db,'i2s',$_POST['i2s']);
 	// unlock session file
-	playerSession('unlock');	
+	playerSession('unlock');
 		break;
 }
 }
@@ -595,10 +595,10 @@ if (isset($_POST['spotify']) && $_POST['spotify'] != $_SESSION['spotify']){
 	//$content .= "\t\t device \t\"hw:".$spotusername.",0\"\n";
 	$content .= "[spop]"."\n";
 	$content .= "spotify_username = ".$_SESSION['spotusername']."\n";
-	$content .= "spotify_password = ".$_SESSION['spotpassword']."\n"; 
-	$content .= "audio_output = sox"."\n"; 
-	$content .= "[sox]"."\n"; 
-	$content .= "output_type = alsa"."\n"; 
+	$content .= "spotify_password = ".$_SESSION['spotpassword']."\n";
+	$content .= "audio_output = sox"."\n";
+	$content .= "[sox]"."\n";
+	$content .= "output_type = alsa"."\n";
 	$content .= "output_name =  plughw:".$device.""."\n";
 	if ($_POST['spotifybitrate'] == 0) {
 	$content .= "high_bitrate = false"."\n";
@@ -664,7 +664,7 @@ $tpl = "settings.html";
 
 <?php
 $sezione = basename(__FILE__, '.php');
-include('_header.php'); 
+include('_header.php');
 ?>
 
 <!-- content --!>
@@ -675,7 +675,7 @@ eval("echoTemplate(\"".getTemplate("templates/$tpl")."\");");
 ?>
 <!-- content -->
 
-<?php 
+<?php
 debug($_POST);
 ?>
 

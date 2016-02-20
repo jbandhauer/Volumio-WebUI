@@ -21,17 +21,17 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							credits.php
  * version:						1.0
  *
  */
- 
+
 // common include
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 ?>
- 
+
 <?php
 $sezione = basename(__FILE__, '.php');
 include('_header.php');

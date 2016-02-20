@@ -21,12 +21,12 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							coverart.php
  * version:						1.0
  *
  */
- 
+
 require_once('Zend/Media/Flac.php'); // or using autoload
 ini_set('display_errors', '1');
 include('connection.php');

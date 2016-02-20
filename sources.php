@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
  *		 Tsunamp Team
@@ -21,15 +21,15 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							sources.php
  * version:						1.1
  *
  */
- 
+
 // common include
 include('inc/connection.php');
-playerSession('open',$db,'',''); 
+playerSession('open',$db,'','');
 ?>
 
 <?php
@@ -106,9 +106,9 @@ if (isset($_POST['delete']) && $_POST['delete'] == 1) {
 		$_SESSION['notify']['msg'] = 'background worker is busy.';
 		session_write_close();
 		}
-	
+
 	} else {
-	
+
 		if ($_SESSION['w_lock'] != 1 && $_SESSION['w_queue'] == '') {
 		session_start();
 		$_SESSION['w_queue'] = 'sourcecfg';
@@ -123,12 +123,12 @@ if (isset($_POST['delete']) && $_POST['delete'] == 1) {
 		$_SESSION['notify']['title'] = 'Job Failed';
 		$_SESSION['notify']['msg'] = 'background worker is busy.';
 		session_write_close();
-		} 
+		}
 	}
 }
-	
+
 // handle manual config
-// rel 1.0 autoFS 
+// rel 1.0 autoFS
 /*
 if(isset($_POST['sourceconf']) && !empty($_POST['sourceconf'])) {
 	// tell worker to write new MPD config
@@ -171,7 +171,7 @@ $_mounts .= "<p><a href=\"sources.php?p=edit&id=".$mp['id']."\" class='btn btn-l
 
 <?php
 $sezione = basename(__FILE__, '.php');
-include('_header.php'); 
+include('_header.php');
 ?>
 
 <!-- content --!>
@@ -190,8 +190,8 @@ if (isset($_GET['p']) && !empty($_GET['p'])) {
 			$_rsize = $mount['rsize'];
 			$_wsize = $mount['wsize'];
 			// mount type select
-			$_source_select['type'] .= "<option value=\"cifs\" ".(($mount['type'] == 'cifs') ? "selected" : "")." >SMB/CIFS</option>\n";	
-			$_source_select['type'] .= "<option value=\"nfs\" ".(($mount['type'] == 'nfs') ? "selected" : "")." >NFS</option>\n";	
+			$_source_select['type'] .= "<option value=\"cifs\" ".(($mount['type'] == 'cifs') ? "selected" : "")." >SMB/CIFS</option>\n";
+			$_source_select['type'] .= "<option value=\"nfs\" ".(($mount['type'] == 'nfs') ? "selected" : "")." >NFS</option>\n";
 			$_charset = $mount['charset'];
 			$_options = $mount['options'];
 			$_error = $mount['error'];
@@ -207,11 +207,11 @@ if (isset($_GET['p']) && !empty($_GET['p'])) {
 	$_hide = 'hide';
 	$_hideerror = 'hide';
 	$_action = 'add';
-	$_source_select['type'] .= "<option value=\"cifs\">SMB/CIFS</option>\n";	
-	$_source_select['type'] .= "<option value=\"nfs\">NFS</option>\n";	
+	$_source_select['type'] .= "<option value=\"cifs\">SMB/CIFS</option>\n";
+	$_source_select['type'] .= "<option value=\"nfs\">NFS</option>\n";
 	}
 	$tpl = 'source.html';
-} 
+}
 debug($_POST);
 eval("echoTemplate(\"".getTemplate("templates/$tpl")."\");");
 ?>

@@ -21,7 +21,7 @@
  *
  *	UI-design/JS code by: 	Andrea Coiutti (aka ACX)
  * PHP/JS code by:			Simone De Gregori (aka Orion)
- * 
+ *
  * file:							net-config.php
  * version:						1.0
  *
@@ -93,9 +93,9 @@ $dbh  = cfgdb_connect($db);
 			$eth0 .= "nameserver ".$_POST['eth0']['dns2']."\n";
 			}
         }
-        
+
         $wlan0 = "\n";
-        
+
     }
 
     // wlan0
@@ -122,9 +122,9 @@ $dbh  = cfgdb_connect($db);
             }
 			}
         }
-       
+
        $eth0 = "\nauto eth0\niface eth0 inet dhcp\n";
-       
+
 
     } // end wlan0
 
@@ -240,8 +240,8 @@ if (!empty($ipwlan0)) {
     $_wlan0security .= "<option value=\"none\"".(($wifisec[0]['security'] == 'none') ? "selected" : "").">No security</option>\n";
     $_wlan0security .= "<option value=\"wep\"".(($wifisec[0]['security'] == 'wep') ? "selected" : "").">WEP</option>\n";
     $_wlan0security .= "<option value=\"wpa\"".(($wifisec[0]['security'] == 'wpa') ? "selected" : "").">WPA/WPA2 - Personal</option>\n";
-	
-    
+
+
 
 $tpl = "net-config.html";
 }

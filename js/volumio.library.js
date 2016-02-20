@@ -13,7 +13,7 @@
  *
  *  Authors:
  *  - v1:                    Joel Takvorian
- * 
+ *
  *  file:                    volumio.library.js
  *  version:                 1
  */
