@@ -1,6 +1,6 @@
 /*
  *      PlayerUI Copyright (C) 2013 Andrea Coiutti & Simone De Gregori
- *		 Tsunamp Team
+ *       Tsunamp Team
  *      http://www.tsunamp.com
  *
  *  This Program is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@
  // Global GUI object
  GUI = {
     MpdState: 0,
-	SpopState: 0,
+    SpopState: 0,
     cmd: 'status',
     playlist: null,
     currentsong: null,
@@ -104,15 +104,15 @@ function backendRequestSpop() {
         async : true,
         cache : false,
         success : function(data) {
-			if (data != '') {
-				GUI.SpopState = data;
-				renderUI();
-	            backendRequestSpop();
-			} else {
-				setTimeout(function() {
-					backendRequestSpop();
-				}, 5000);
-			}
+            if (data != '') {
+                GUI.SpopState = data;
+                renderUI();
+                backendRequestSpop();
+            } else {
+                setTimeout(function() {
+                    backendRequestSpop();
+                }, 5000);
+            }
         },
         error : function() {
             setTimeout(function() {
@@ -123,24 +123,24 @@ function backendRequestSpop() {
 }
 
 function renderUI() {
-	if (GUI.SpopState['state'] == 'play' || GUI.SpopState['state'] == 'pause') {
-	// If Spop is playing, temporarily redirect button control and title display to Spop
-	    GUI.state = GUI.SpopState['state'];
+    if (GUI.SpopState['state'] == 'play' || GUI.SpopState['state'] == 'pause') {
+    // If Spop is playing, temporarily redirect button control and title display to Spop
+        GUI.state = GUI.SpopState['state'];
 
-		// Combine the Spop state array with the Mpd state array - any state variable defined by Spop will overwrite the corresponding Mpd state variable
-		var objectCombinedState = $.extend({}, GUI.MpdState, GUI.SpopState);
-	    updateGUI(objectCombinedState);
-		refreshTimer(parseInt(objectCombinedState['elapsed']), parseInt(objectCombinedState['time']), objectCombinedState['state']);
-		refreshKnob(objectCombinedState);
+        // Combine the Spop state array with the Mpd state array - any state variable defined by Spop will overwrite the corresponding Mpd state variable
+        var objectCombinedState = $.extend({}, GUI.MpdState, GUI.SpopState);
+        updateGUI(objectCombinedState);
+        refreshTimer(parseInt(objectCombinedState['elapsed']), parseInt(objectCombinedState['time']), objectCombinedState['state']);
+        refreshKnob(objectCombinedState);
 
-	} else {
-	// Else UI should be connected to MPD status
-	    GUI.state = GUI.MpdState['state'];
-	    updateGUI(GUI.MpdState);
-		refreshTimer(parseInt(GUI.MpdState['elapsed']), parseInt(GUI.MpdState['time']), GUI.MpdState['state']);
-		refreshKnob(GUI.MpdState);
+    } else {
+    // Else UI should be connected to MPD status
+        GUI.state = GUI.MpdState['state'];
+        updateGUI(GUI.MpdState);
+        refreshTimer(parseInt(GUI.MpdState['elapsed']), parseInt(GUI.MpdState['time']), GUI.MpdState['state']);
+        refreshKnob(GUI.MpdState);
 
-	}
+    }
 
     if (GUI.state != 'disconnected') {
         $('#loader').hide();
@@ -208,14 +208,14 @@ function getPlaylist(json){
 }
 
 function parsePath(str) {
-	var cutpos=str.lastIndexOf("/");
-	//-- verify this switch! (Orion)
-	if (cutpos !=-1) {
+    var cutpos=str.lastIndexOf("/");
+    //-- verify this switch! (Orion)
+    if (cutpos !=-1) {
         var songpath = str.slice(0,cutpos);
-	}  else {
+    }  else {
         songpath = '';
-	}
-	return songpath;
+    }
+    return songpath;
 }
 
 function pluginListItem(id, text, faicon, onclick) {
@@ -226,214 +226,214 @@ function pluginListItem(id, text, faicon, onclick) {
 }
 
 function parseResponse(inputArr,respType,i,inpath) {
-	var content = "";
+    var content = "";
 
-	switch (respType) {
-		case 'playlist':
-			// code placeholder
-		break;
+    switch (respType) {
+        case 'playlist':
+            // code placeholder
+        break;
 
-		case 'db':
-			if (inputArr[i].Type == 'MpdFile') {
-			// This is a MPD playable file
-				if (typeof inputArr[i].Title != 'undefined') {
-				// This is a local file with a title
-					content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
-					content += inputArr[i].file;
-					content += '"><div class="db-icon db-song db-browse"><i class="fa fa-music sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
-					content += inputArr[i].Title + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
-					content += ' <span>';
-					content +=  inputArr[i].Artist;
-					content += ' - ';
-					content +=  inputArr[i].Album;
-					content += '</span></div></li>';
-					showtype = 'music'
+        case 'db':
+            if (inputArr[i].Type == 'MpdFile') {
+            // This is a MPD playable file
+                if (typeof inputArr[i].Title != 'undefined') {
+                // This is a local file with a title
+                    content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+                    content += inputArr[i].file;
+                    content += '"><div class="db-icon db-song db-browse"><i class="fa fa-music sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-song db-browse">';
+                    content += inputArr[i].Title + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
+                    content += ' <span>';
+                    content +=  inputArr[i].Artist;
+                    content += ' - ';
+                    content +=  inputArr[i].Album;
+                    content += '</span></div></li>';
+                    showtype = 'music'
 
-				} else {
-				// This is some other format (eg. streams)
+                } else {
+                // This is some other format (eg. streams)
                     var dbItemClass = (inputArr[i].Time === undefined) ? "db-other" : "db-song";
-					content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
-					content += inputArr[i].file;
+                    content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+                    content += inputArr[i].file;
 
-					if (inpath == 'WEBRADIO') {
-					// This is a webradio stream
+                    if (inpath == 'WEBRADIO') {
+                    // This is a webradio stream
                         content += '"><div class="db-icon ' + dbItemClass + ' db-browse"><i class="fa fa-microphone sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry ' + dbItemClass + ' db-browse">';
                         showtype = 'radio'
 
-					} else {
-					// This is an unknown file type
+                    } else {
+                    // This is an unknown file type
                         content += '"><div class="db-icon ' + dbItemClass + ' db-browse"><i class="fa fa-music sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry ' + dbItemClass + ' db-browse">';
                         showtype = 'file'
 
-					}
+                    }
 
-					// Strip the leading path and trailing '.pls', and display only the filename
-					content += inputArr[i].file.replace(inpath + '/', '').replace('.pls', '') + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
-					content += '</div></li>';
+                    // Strip the leading path and trailing '.pls', and display only the filename
+                    content += inputArr[i].file.replace(inpath + '/', '').replace('.pls', '') + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
+                    content += '</div></li>';
 
-				}
+                }
 
-			} else if (inputArr[i].Type == 'MpdDirectory') {
-			// This is a MPD folder
-				content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
-				content += inputArr[i].directory;
-				showtype = 'file';
+            } else if (inputArr[i].Type == 'MpdDirectory') {
+            // This is a MPD folder
+                content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+                content += inputArr[i].directory;
+                showtype = 'file';
 
-				if (inpath != '') {
-				// This is a generic folder not at the root level
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-folder-open sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                if (inpath != '') {
+                // This is a generic folder not at the root level
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-folder-open sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-				} else if (inputArr[i].directory == 'WEBRADIO') {
-				// This is the WEBRADIO root folder
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-microphone icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                } else if (inputArr[i].directory == 'WEBRADIO') {
+                // This is the WEBRADIO root folder
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-microphone icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-				} else if (inputArr[i].directory == 'NAS') {
-				// This is the NAS root folder
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-code-fork icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                } else if (inputArr[i].directory == 'NAS') {
+                // This is the NAS root folder
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-code-fork icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-				} else if (inputArr[i].directory == 'USB') {
-				// This is the USB root folder
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-hdd-o icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                } else if (inputArr[i].directory == 'USB') {
+                // This is the USB root folder
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-hdd-o icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-				} else if (inputArr[i].directory == 'RAMPLAY') {
-				// This is the RAMPLAY root folder
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spinner icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                } else if (inputArr[i].directory == 'RAMPLAY') {
+                // This is the RAMPLAY root folder
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spinner icon-root sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-root"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-				}
+                }
 
-				if (inputArr[i].DisplayName) {
-				// If a DisplayName is available for this entry, use it
-					content += inputArr[i].DisplayName;
+                if (inputArr[i].DisplayName) {
+                // If a DisplayName is available for this entry, use it
+                    content += inputArr[i].DisplayName;
 
-				} else {
-				// Else strip the leading path and slash, and display the folder name
-					content += inputArr[i].directory.replace(inpath + '/', '');
+                } else {
+                // Else strip the leading path and slash, and display the folder name
+                    content += inputArr[i].directory.replace(inpath + '/', '');
 
-				}
+                }
 
-				content += '</div></li>';
+                content += '</div></li>';
 
-			} else if (inputArr[i].Type == 'SpopTrack') {
-			// This is a Spotify file
-				content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
-				content += inputArr[i].SpopTrackUri;
-				content += '" data-artist="';
-				content += inputArr[i].Artist;
-				content += '" data-album="';
-				content += inputArr[i].Album;
-				content += '" data-title="';
-				content += inputArr[i].Title;
-content += '"><div class="db-icon db-spop db-browse"><i class="fa fa-spotify sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-spotifytrack"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-spop db-browse">';
-				content += inputArr[i].Title + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
-				content += ' <span>';
-				content +=  inputArr[i].Artist;
-				content += ' - ';
-				content +=  inputArr[i].Album;
-				content += '</span></div></li>';
-				showtype = 'music';
+            } else if (inputArr[i].Type == 'SpopTrack') {
+            // This is a Spotify file
+                content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+                content += inputArr[i].SpopTrackUri;
+                content += '" data-artist="';
+                content += inputArr[i].Artist;
+                content += '" data-album="';
+                content += inputArr[i].Album;
+                content += '" data-title="';
+                content += inputArr[i].Title;
+                content += '"><div class="db-icon db-spop db-browse"><i class="fa fa-spotify sx db-browse"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-spotifytrack"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-spop db-browse">';
+                content += inputArr[i].Title + ' <em class="songtime">' + timeConvert(inputArr[i].Time) + '</em>';
+                content += ' <span>';
+                content +=  inputArr[i].Artist;
+                content += ' - ';
+                content +=  inputArr[i].Album;
+                content += '</span></div></li>';
+                showtype = 'music';
 
-			} else if (inputArr[i].Type == 'SpopDirectory') {
-			// This is a Spotify folder or playlist
-				content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
-				content += inputArr[i].directory;
-				showtype = 'file';
+            } else if (inputArr[i].Type == 'SpopDirectory') {
+            // This is a Spotify folder or playlist
+                content = '<li id="db-' + (i + 1) + '" class="clearfix" data-path="';
+                content += inputArr[i].directory;
+                showtype = 'file';
 
-				if (inpath != '') {
-				// This is a Spotify folder not at the root level
-					if (typeof inputArr[i].SpopPlaylistIndex != 'undefined') {
-					// This is a browsable Spotify playlist
-						content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-list-ol sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-spotifyplaylist"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
+                if (inpath != '') {
+                // This is a Spotify folder not at the root level
+                    if (typeof inputArr[i].SpopPlaylistIndex != 'undefined') {
+                    // This is a browsable Spotify playlist
+                        content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-list-ol sx"></i></div><div class="db-action"><a class="btn" href="#notarget" title="Actions" data-toggle="context" data-target="#context-menu-spotifyplaylist"><i class="fa fa-reorder"></i></a></div><div class="db-entry db-folder db-browse">';
 
-					} else {
-					// This is a generic Spotify folder
-						content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-folder-open sx"></i></div><div class="db-entry db-folder db-browse">';
+                    } else {
+                    // This is a generic Spotify folder
+                        content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-folder-open sx"></i></div><div class="db-entry db-folder db-browse">';
 
-					}
+                    }
 
-				} else if (inputArr[i].directory == 'SPOTIFY') {
-				// This is the SPOTIFY root folder
-					content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spotify icon-root sx"></i></div><div class="db-entry db-folder db-browse">';
+                } else if (inputArr[i].directory == 'SPOTIFY') {
+                // This is the SPOTIFY root folder
+                    content += '"><div class="db-icon db-folder db-browse"><i class="fa fa-spotify icon-root sx"></i></div><div class="db-entry db-folder db-browse">';
 
-				}
+                }
 
-				if (inputArr[i].DisplayName) {
-				// If a DisplayName is available for this entry, use it
-					content += inputArr[i].DisplayName;
+                if (inputArr[i].DisplayName) {
+                // If a DisplayName is available for this entry, use it
+                    content += inputArr[i].DisplayName;
 
-				} else {
-				// Else strip the leading path and slash, and display the folder name
-					content += inputArr[i].directory.replace(inpath + '/', '');
+                } else {
+                // Else strip the leading path and slash, and display the folder name
+                    content += inputArr[i].directory.replace(inpath + '/', '');
 
-				}
+                }
 
-				content += '</div></li>';
+                content += '</div></li>';
 
-			}
+            }
 
-		break;
+        break;
 
-	}
+    }
 
-	return content;
+    return content;
 } // end parseResponse()
 
 function getDB(cmd, path, browsemode, uplevel){
-	if (cmd == 'filepath') {
-		$.post('db/?cmd=filepath', { 'path': path }, function(data) {
-			populateDB(data, path, uplevel);
-		}, 'json');
+    if (cmd == 'filepath') {
+        $.post('db/?cmd=filepath', { 'path': path }, function(data) {
+            populateDB(data, path, uplevel);
+        }, 'json');
 
-	} else if (cmd == 'add') {
-		$.post('db/?cmd=add', { 'path': path }, function(path) {
-		}, 'json');
+    } else if (cmd == 'add') {
+        $.post('db/?cmd=add', { 'path': path }, function(path) {
+        }, 'json');
 
-	} else if (cmd == 'addplay') {
-		$.post('db/?cmd=addplay', { 'path': path }, function(path) {
-		}, 'json');
+    } else if (cmd == 'addplay') {
+        $.post('db/?cmd=addplay', { 'path': path }, function(path) {
+        }, 'json');
 
-	} else if (cmd == 'addreplaceplay') {
-		$.post('db/?cmd=addreplaceplay', { 'path': path }, function(path) {
-		}, 'json');
+    } else if (cmd == 'addreplaceplay') {
+        $.post('db/?cmd=addreplaceplay', { 'path': path }, function(path) {
+        }, 'json');
 
-	} else if (cmd == 'update') {
-		$.post('db/?cmd=update', { 'path': path }, function(path) {
-		}, 'json');
+    } else if (cmd == 'update') {
+        $.post('db/?cmd=update', { 'path': path }, function(path) {
+        }, 'json');
 
-	} else if (cmd == 'search') {
-		var keyword = $('#db-search-keyword').val();
-		$.post('db/?querytype=' + browsemode + '&cmd=search', { 'query': keyword }, function(data) {
-			populateDB(data, path, uplevel, keyword);
-		}, 'json');
+    } else if (cmd == 'search') {
+        var keyword = $('#db-search-keyword').val();
+        $.post('db/?querytype=' + browsemode + '&cmd=search', { 'query': keyword }, function(data) {
+            populateDB(data, path, uplevel, keyword);
+        }, 'json');
 
-	} else if (cmd == 'playall') {
-			$.post('db/?cmd=playall', { 'path': path }, function(data) {}, 'json');
+    } else if (cmd == 'playall') {
+            $.post('db/?cmd=playall', { 'path': path }, function(data) {}, 'json');
 
-	} else if (cmd == 'addall') {
-			$.post('db/?cmd=addall', { 'path': path }, function(data) {}, 'json');
+    } else if (cmd == 'addall') {
+            $.post('db/?cmd=addall', { 'path': path }, function(data) {}, 'json');
 
-	}
+    }
 
 }
 
 function populateDB(data, path, uplevel, keyword){
-	if (path) GUI.currentpath = path;
-	var DBlist = $('ul.database');
-	DBlist.html('');
+    if (path) GUI.currentpath = path;
+    var DBlist = $('ul.database');
+    DBlist.html('');
 
-	if (keyword) {
-		var results = (data.length) ? data.length : '0';
-		var s = (data.length == 1) ? '' : 's';
-		var text = "" + results + ' result' + s + ' for "<em class="keyword">' + keyword + '</em>"';
-		$("#db-back").attr("title", "Close search results and go back to the DB");
-		$("#db-back-text").html(text);
-		$("#db-back").show();
+    if (keyword) {
+        var results = (data.length) ? data.length : '0';
+        var s = (data.length == 1) ? '' : 's';
+        var text = "" + results + ' result' + s + ' for "<em class="keyword">' + keyword + '</em>"';
+        $("#db-back").attr("title", "Close search results and go back to the DB");
+        $("#db-back-text").html(text);
+        $("#db-back").show();
 
-	} else if (path != '') {
-		$("#db-back").attr("title", "");
-		$("#db-back-text").html("back");
-		$("#db-back").show();
+    } else if (path != '') {
+        $("#db-back").attr("title", "");
+        $("#db-back-text").html("back");
+        $("#db-back").show();
 
-	} else {
+    } else {
         $("#db-back").hide();
 
         if (library && library.isEnabled && !library.displayAsTab) {
@@ -443,31 +443,31 @@ function populateDB(data, path, uplevel, keyword){
 
     }
 
-	var i = 0;
-	for (i = 0; i < data.length; i++){
-	 	DBlist.append(parseResponse(data,'db',i,path));
+    var i = 0;
+    for (i = 0; i < data.length; i++){
+        DBlist.append(parseResponse(data,'db',i,path));
 
-	}
+    }
 
-	if (typeof data[0].DisplayPath != 'undefined') {
-		$('#db-currentpath span').html(data[0].DisplayPath);
+    if (typeof data[0].DisplayPath != 'undefined') {
+        $('#db-currentpath span').html(data[0].DisplayPath);
 
-	} else {
-		$('#db-currentpath span').html(path);
+    } else {
+        $('#db-currentpath span').html(path);
 
-	}
+    }
 
-	if (uplevel) {
-		$('#db-' + GUI.currentDBpos[GUI.currentDBpos[10]]).addClass('active');
-		customScroll('db', GUI.currentDBpos[GUI.currentDBpos[10]]);
-	} else {
-		customScroll('db', 0, 0);
-	}
-	if (showtype == 'radio') {
+    if (uplevel) {
+        $('#db-' + GUI.currentDBpos[GUI.currentDBpos[10]]).addClass('active');
+        customScroll('db', GUI.currentDBpos[GUI.currentDBpos[10]]);
+    } else {
+        customScroll('db', 0, 0);
+    }
+    if (showtype == 'radio') {
         $("#webradio-add").show();
-	} else {
+    } else {
         $("#webradio-add").hide();
-	}
+    }
 }
 
 // update interface
@@ -491,11 +491,11 @@ function updateGUI(objectInputState){
 
     }
 
-	$('#elapsed').html(timeConvert(objectInputState['elapsed']));
-	$('#total').html(timeConvert(objectInputState['time']));
-	//$('#time').val(objectInputState['song_percent']).trigger('change');
+    $('#elapsed').html(timeConvert(objectInputState['elapsed']));
+    $('#total').html(timeConvert(objectInputState['time']));
+    //$('#time').val(objectInputState['song_percent']).trigger('change');
 
-	var fileinfo = (objectInputState['audio_channels'] &&
+    var fileinfo = (objectInputState['audio_channels'] &&
                   objectInputState['audio_sample_depth'] &&
                   objectInputState['audio_sample_rate'] &&
                   objectInputState['bitrate'] &&
@@ -506,23 +506,23 @@ function updateGUI(objectInputState){
      objectInputState['bitrate'] + ' ' +
      objectInputState['fileext'].toLowerCase())
     : '&nbsp;';
-	$('#format-bitrate').html(fileinfo);
+    $('#format-bitrate').html(fileinfo);
 
-	$('#playlist-position').html('Playlist position ' + (parseInt(objectInputState['song']) + 1) +'/'+objectInputState['playlistlength']);
-	$('.playlist li').removeClass('active');
-	var current = parseInt(objectInputState['song']) + 1;
-	if (!isNaN(current)) {
-		$('.playlist li:nth-child(' + current + ')').addClass('active');
+    $('#playlist-position').html('Playlist position ' + (parseInt(objectInputState['song']) + 1) +'/'+objectInputState['playlistlength']);
+    $('.playlist li').removeClass('active');
+    var current = parseInt(objectInputState['song']) + 1;
+    if (!isNaN(current)) {
+        $('.playlist li:nth-child(' + current + ')').addClass('active');
 
-	}
+    }
 
-	// show UpdateDB icon
-	// console.log('dbupdate = ', GUI.MpdState['updating_db']);
-	if (typeof GUI.MpdState['updating_db'] != 'undefined') {
-		$('.open-panel-sx').html('<i class="fa fa-refresh fa-spin"></i> Updating');
-	} else {
-		$('.open-panel-sx').html('<i class="fa fa-music sx"></i> Browse');
-	}
+    // show UpdateDB icon
+    // console.log('dbupdate = ', GUI.MpdState['updating_db']);
+    if (typeof GUI.MpdState['updating_db'] != 'undefined') {
+        $('.open-panel-sx').html('<i class="fa fa-refresh fa-spin"></i> Updating');
+    } else {
+        $('.open-panel-sx').html('<i class="fa fa-music sx"></i> Browse');
+    }
 
     // check song update
     if (GUI.currentsong != objectInputState['currentsong']) {
@@ -565,13 +565,13 @@ function updateGUI(objectInputState){
 
     GUI.halt = 0;
     GUI.currentsong = objectInputState['currentsong'];
-	GUI.currentartist = objectInputState['currentartist'];
+    GUI.currentartist = objectInputState['currentartist'];
 
-	//Change Name according to Now Playing
-	if (GUI.currentartist != null && GUI.currentsong != null) {
-		document.title = objectInputState['currentsong'] + ' - ' + objectInputState['currentartist'] + ' - ' + 'Volumio';
+    //Change Name according to Now Playing
+    if (GUI.currentartist != null && GUI.currentsong != null) {
+        document.title = objectInputState['currentsong'] + ' - ' + objectInputState['currentartist'] + ' - ' + 'Volumio';
 
-	} else {
+    } else {
             document.title = 'Volumio - Audiophile Music Player';
 
     }
@@ -616,13 +616,13 @@ function refreshKnob(json){
 // time conversion
 function timeConvert(seconds) {
     if(isNaN(seconds)) {
-    	display = '';
+        display = '';
     } else {
-    	minutes = Math.floor(seconds / 60);
-    	seconds -= minutes * 60;
-    	mm = (minutes < 10) ? ('0' + minutes) : minutes;
-    	ss = (seconds < 10) ? ('0' + seconds) : seconds;
-    	display = mm + ':' + ss;
+        minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
+        mm = (minutes < 10) ? ('0' + minutes) : minutes;
+        ss = (seconds < 10) ? ('0' + seconds) : seconds;
+        display = mm + ':' + ss;
     }
     return display;
 }
@@ -637,12 +637,12 @@ function countdownRestart(startFrom) {
 function setVolume(val) {
     GUI.volume = val;
 
-	// Push volume updates into the MPD state array, since we opted not to get
-	// volume change updates from MPD daemon
-	if ("volume" in GUI.MpdState) {
-		GUI.MpdState.volume = val;
+    // Push volume updates into the MPD state array, since we opted not to get
+    // volume change updates from MPD daemon
+    if ("volume" in GUI.MpdState) {
+        GUI.MpdState.volume = val;
 
-	}
+    }
 
     GUI.halt = 1;
 
