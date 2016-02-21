@@ -73,7 +73,7 @@ function sendPLCmd(inputcmd) {
 }
 
 function backendRequest(send_state) {
-    url = send_state ? ('_player_engine.php?state=' + GUI.MpdState['state']) : '_player_engine.php'
+    var url = send_state ? ('_player_engine.php?state=' + GUI.MpdState['state']) : '_player_engine.php'
     $.ajax({
         type : 'GET',
         url : url,
