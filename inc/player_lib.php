@@ -1735,7 +1735,8 @@ function wrk_sysEnvCheck($arch,$install) {
 }
 
 function alsa_findHwMixerControl($device) {
-	$mixer_name = 'Digital';
+	$mixer_name = 'PCM';
+	// $mixer_name = 'Digital';
 	if (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberryplus') {
 		$hwmixerdev = $mixer_name;
 	} elseif (isset($_SESSION['i2s']) && $_SESSION['i2s'] == 'Hifiberry') {
