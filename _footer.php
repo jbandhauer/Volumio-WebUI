@@ -55,13 +55,15 @@
 
 <!-- loader -->
 <div id="loader"><div id="loaderbg"></div><div id="loadercontent"><i class="fa fa-refresh fa-spin"></i>connecting...</div></div>
-<script src="js/jquery-1.8.2.min.js"></script>
+<!-- <script src="js/jquery-1.8.2.min.js"></script> -->
+<script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery-ui-1.11.1.custom.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-select.min.js"></script>
 <script src="js/notify.js"></script>
 <script src="js/jquery.countdown.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
+<!-- <script src="js/jquery.scrollTo.min.js"></script> -->
+<script src="js/jquery.scrollTo-2.1.2.min.js"></script>
 <script src="js/volumio.api.js"></script>
 <script src="js/volumio.lazyloader.js"></script>
 <script src="js/volumio.library.js"></script>
