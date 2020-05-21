@@ -379,6 +379,10 @@ function parseResponse(inputArr,respType,i,inpath) {
 
 function getDB(cmd, path, browsemode, uplevel){
     if (cmd == 'filepath') {
+        if (path == undefined || path == '')
+            path = localStorage.getItem("saved_path")
+        localStorage.setItem("saved_path", path)
+        
         $.post('db/?cmd=filepath', { 'path': path }, function(data) {
             populateDB(data, path, uplevel);
         }, 'json');

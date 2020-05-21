@@ -345,6 +345,7 @@ jQuery(document).ready(function($){ 'use strict';
             var path = path.slice(0,cutpos);
         }  else {
             path = '';
+            localStorage.setItem("saved_path", path)
         }
         getDB('filepath', path, GUI.browsemode, 1);
     });
