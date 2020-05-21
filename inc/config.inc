@@ -34,10 +34,19 @@ define('ROOTPATH', $_SERVER['HOME'] . '/' ); // default = '/'
 //define('ROOTPATH', $_SERVER['DOCUMENT_ROOT'] . '/' ); // default = '/'
 define('DAEMONIP', 'localhost'); // default = 'localhost'
 // DEV debug parameters
-//ini_set('display_errors',1);
-//define('ERRORLEVEL', '-1'); // default = 'E_ALL ^ E_NOTICE'
+// ini_set('display_errors',1);
+ini_set('error_log', '/var/log/php_errors.log'); 
+// ini_set('log_errors', 'on');
+// define('ERRORLEVEL', '-1'); // default = 'E_ALL ^ E_NOTICE'
 //__production
-define('ERRORLEVEL', 'E_ERROR'); // default = 'E_ALL ^ E_NOTICE'
+define('ERRORLEVEL', 'E_ALL ^ E_NOTICE'); // default = 'E_ALL ^ E_NOTICE'
+// NOTE jband: I had a heck of a time figuring out why I could not get log output
+// to '/var/log/php_errors.log'. I turned out that this the file was only writable by 
+// root and the php runs as the `www-data` user. I changed the owner of the file to 
+// be www-data.
+// define('ERRORLEVEL', 'E_ERROR'); // default = 'E_ALL ^ E_NOTICE'
+// error_log("this is error text dfgjdg2");
+// error_log("You messed up!\n", 3, "/var/tmp/my-errors.log");
 // configurazione generale
 define ('COMMENTCHAR','#');
 define ('DELSTRING','');

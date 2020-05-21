@@ -703,7 +703,7 @@ function parseFileStr($strFile,$delimiter) {
 }
 
 // cfg engine and session management
-function playerSession($action,$db,$var,$value) {
+function playerSession($action, $db = null, $var = null, $value = null) {
 	$status = session_status();
 
 	// open new PHP SESSION
@@ -793,7 +793,7 @@ function cfgdb_connect($dbpath) {
 
 }
 
-function cfgdb_read($table,$dbh,$param,$id) {
+function cfgdb_read($table, $dbh, $param = null, $id = null) {
 	if(!isset($param)) {
 	   $querystr = 'SELECT * from '.$table;
 	} else if (isset($id)) {
