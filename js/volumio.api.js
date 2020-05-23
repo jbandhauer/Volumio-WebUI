@@ -36,7 +36,7 @@
     currentsong: null,
     currentknob: null,
     state: '',
-    currentpath: '',
+    currentpath: localStorage.getItem("saved_path") || '',
     halt: 0,
     volume: null,
     currentDBpos: new Array(0,0,0,0,0,0,0,0,0,0,0),
@@ -44,6 +44,10 @@
     visibility: 'visible',
     DBupdate: 0
 };
+
+if (localStorage.getItem('saved_db_pos_array')) {
+    GUI.currentDBpos = localStorage.getItem('saved_db_pos_array').split`,`.map(x=>+x)
+}
 
 // FUNCTIONS
 // ----------------------------------------------------------------------------------------------------
@@ -379,10 +383,6 @@ function parseResponse(inputArr,respType,i,inpath) {
 
 function getDB(cmd, path, browsemode, uplevel){
     if (cmd == 'filepath') {
-        if (path == undefined || path == '')
-            path = localStorage.getItem("saved_path")
-        localStorage.setItem("saved_path", path)
-        
         $.post('db/?cmd=filepath', { 'path': path }, function(data) {
             populateDB(data, path, uplevel);
         }, 'json');
@@ -419,8 +419,16 @@ function getDB(cmd, path, browsemode, uplevel){
 
 }
 
+function savePath(path) {
+    if (path) {
+        GUI.currentpath = path;
+        localStorage.setItem('saved_path', path)
+    }
+}
+
+
 function populateDB(data, path, uplevel, keyword){
-    if (path) GUI.currentpath = path;
+    savePath(path);
     var DBlist = $('ul.database');
     DBlist.html('');
 
@@ -440,9 +448,13 @@ function populateDB(data, path, uplevel, keyword){
     } else {
         $("#db-back").hide();
 
+        // reset the path tracking to the initial state
+        GUI.currentDBpos = new Array(0,0,0,0,0,0,0,0,0,0,0);
+        localStorage.setItem('saved_db_pos_array', GUI.currentDBpos.toString());
+        localStorage.setItem('saved_path', '');
+
         if (library && library.isEnabled && !library.displayAsTab) {
             DBlist.append(pluginListItem("db-plug-lib", "LIBRARY", "fa-columns", "showLibraryView()"));
-
         }
 
     }

@@ -339,13 +339,13 @@ jQuery(document).ready(function($){ 'use strict';
     // click on database "back"
     $('#db-back').click(function() {
         --GUI.currentDBpos[10];
+        localStorage.setItem('saved_db_pos_array', GUI.currentDBpos.toString());
         var path = GUI.currentpath;
         var cutpos=path.lastIndexOf("/");
         if (cutpos !=-1) {
             var path = path.slice(0,cutpos);
         }  else {
             path = '';
-            localStorage.setItem("saved_path", path)
         }
         getDB('filepath', path, GUI.browsemode, 1);
     });
@@ -361,6 +361,7 @@ jQuery(document).ready(function($){ 'use strict';
                 entryID = entryID.replace('db-','');
                 GUI.currentDBpos[GUI.currentDBpos[10]] = entryID;
                 ++GUI.currentDBpos[10];
+                localStorage.setItem('saved_db_pos_array', GUI.currentDBpos.toString());
                 getDB('filepath', path, 'file', 0);
             }
         }
