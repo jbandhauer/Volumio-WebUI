@@ -582,6 +582,7 @@ function updateGUI(objectInputState){
     GUI.halt = 0;
     GUI.currentsong = objectInputState['currentsong'];
     GUI.currentartist = objectInputState['currentartist'];
+    GUI.currentalbum = objectInputState['currentalbum'];
 
     //Change Name according to Now Playing
     if (GUI.currentartist != null && GUI.currentsong != null) {
@@ -720,4 +721,33 @@ $('a.facebook').click(function(e){
 $('a.googleplus').click(function(e){
     var urlGooglePlus = 'https://plus.google.com/share?url=http%3A%2F%2Fvolumio.org%2F';;
     $('a.googleplus').attr('href', urlGooglePlus);
+});
+
+// search links
+$('a.artist').click(function(e){
+    $('a.artist').attr('href', 
+        'https://www.google.com/search?q=' + 
+        '%22' + encodeURIComponent(GUI.currentartist) + '%22');
+});
+
+$('a.album').click(function(e){
+    $('a.album').attr('href', 
+        'https://www.google.com/search?q=' + 
+        '%22' + encodeURIComponent(GUI.currentartist) + '%22 ' + 
+        '%22' + encodeURIComponent(GUI.currentalbum) + '%22');
+});
+
+$('a.song').click(function(e){
+    $('a.song').attr('href', 
+        'https://www.google.com/search?q=' + 
+        '%22' + encodeURIComponent(GUI.currentartist) + '%22 ' + 
+        '%22' + encodeURIComponent(GUI.currentsong) + '%22');
+});
+
+$('a.lyrics').click(function(e){
+    $('a.lyrics').attr('href', 
+        'https://www.google.com/search?q=' + 
+        '%22' + encodeURIComponent(GUI.currentartist) + '%22 ' + 
+        '%22' + encodeURIComponent(GUI.currentsong) + '%22 ' + 
+        'lyrics');
 });
