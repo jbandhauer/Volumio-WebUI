@@ -34,3 +34,33 @@ function set_mixer_levels($input) {
 		exec("sudo -H -u mpd amixer -D equal cset numid=$x $level");
 	}
 }
+
+$mixer_level_sets = array(
+	"65 65 65 65 65 65 65 65 65 65",
+	"68 68 68 65 65 65 65 65 65 65",
+	"70 70 70 68 65 65 65 65 65 65",
+	"72 72 72 70 65 65 65 65 65 65",
+	"74 74 74 72 65 65 65 65 65 65",
+	"76 76 74 72 65 65 65 65 65 65",
+	"78 78 76 72 65 65 65 65 65 65",
+	"80 80 76 72 65 65 65 65 65 65",
+	"82 82 78 74 65 65 65 65 65 65"
+);
+
+function set_bass_level($level) {
+	global $mixer_level_sets;
+
+	$mixer_level_sets_count = count($mixer_level_sets);
+
+	if ($level < 0) {
+		$level = 0;
+	} else if ($level >= $mixer_level_sets_count) {
+		$level = $mixer_level_sets_count - 1;
+	}
+
+	set_mixer_levels($mixer_level_sets[$level]);
+
+	return $level;
+}
+
+?>

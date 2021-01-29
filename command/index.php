@@ -87,6 +87,9 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 				set_mixer_levels(substr($sRawCommand, 17));
 				echo json_encode(['levels' => get_mixer_levels()]);
 
+			} else if (strcmp(substr($sRawCommand,0,14), "set_bass_level") == 0) {
+				echo json_encode(['bass_level' => set_bass_level(substr($sRawCommand, 15))]);
+
 			} else {
 			// Else pass command to MPD
 				sendMpdCommand($mpd,$sRawCommand);

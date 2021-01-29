@@ -751,3 +751,39 @@ $('a.lyrics').click(function(e){
         '%22' + encodeURIComponent(GUI.currentsong) + '%22 ' + 
         'lyrics');
 });
+
+$('a.bass_f').click(function(e){
+    sendCmd('set_bass_level 0');
+});
+
+$('a.bass_1').click(function(e){
+    sendCmd('set_bass_level 1');
+});
+
+$('a.bass_2').click(function(e){
+    sendCmd('set_bass_level 2');
+});
+
+$('a.bass_3').click(function(e){
+    sendCmd('set_bass_level 3');
+});
+
+$('a.bass_4').click(function(e){
+    sendCmd('set_bass_level 4');
+});
+
+$('a.bass_5').click(function(e){
+    sendCmd('set_bass_level 5');
+});
+
+$('a.bass_6').click(function(e){
+    sendCmd('set_bass_level 6');
+});
+
+$('a.bass_7').click(function(e){
+    sendCmd('set_bass_level 7');
+});
+
+$('a.bass_8').click(function(e){
+    sendCmd('set_bass_level 8');
+});

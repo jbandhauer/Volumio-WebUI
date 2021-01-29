@@ -1076,6 +1076,11 @@ body { background: #cf0; } */
 	color: #eee;
 }
 
+.basslinks {
+	text-decoration: none;
+	color: #eee;
+}
+
 #twbutton {
     text-decoration: none;
 	padding-right: 10px;
