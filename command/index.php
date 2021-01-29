@@ -79,6 +79,14 @@ if (isset($_GET['cmd']) && $_GET['cmd'] != '') {
 
 				}
 
+			# Support for setting mixer leves using alsa.
+			} else if (strcmp($sRawCommand, "get_mixer_levels") == 0) {
+				echo json_encode(['levels' => get_mixer_levels()]);
+
+			} else if (strcmp(substr($sRawCommand,0,16), "set_mixer_levels") == 0) {
+				set_mixer_levels(substr($sRawCommand, 17));
+				echo json_encode(['levels' => get_mixer_levels()]);
+
 			} else {
 			// Else pass command to MPD
 				sendMpdCommand($mpd,$sRawCommand);
